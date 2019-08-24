@@ -1,0 +1,1 @@
+/usr/bin/c++  -g   CMakeFiles/Macaco.dir/main.cpp.o  -o Macaco 

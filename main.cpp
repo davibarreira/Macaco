@@ -5,14 +5,55 @@
 #include <any>
 #include <variant>
 
+
+using table_type = std::map<std::string, std::variant<std::vector<int>, std::vector<char>, std::vector<std::string>,std::vector<double>>>;
+using variant_vec = std::variant<std::vector<int>, std::vector<char>, std::vector<std::string>,std::vector<double>>;
+
+
+std::vector<int> getv(variant_vec v){
+
+    auto *p = std::get_if<std::vector<int>>(&v);
+
+    return *p;
+}
+
+//template <typename T>
+//std::vector<T
+
 int main() {
 
+
+
+
+    std::map<std::string, void *> dex;
+    std::vector<int> idade {11,10,2};
+    std::vector<double> preco {1.0,5.2,2.2};
+
+    dex["Col1"] = &idade;
+    dex["Col2"] = &preco;
+
+//    std::cout << (*dex["Col1"])[0];
+
+    std::cout << (*static_cast<std::vector<int>*>(dex["Col1"]))[0];
+
+    std::vector<int>* v1 = static_cast<std::vector<int>*>(dex["Col1"]);
+    dex["Col1"] = v1;
+
+
+//    ii = typeid(dex["Col1"]);
+
     std::map<std::string, std::variant<std::vector<int>, std::vector<char>, std::vector<std::string>,std::vector<double>>> m;
-    std::vector<int> v {1,0,10};
-    m["Col1"] = v;
+    std::vector<int> vv {1,0,10};
+    m["Col1"] = vv;
     m["Col2"] = std::vector<int> {1, 2, 2, 2};
 
-    auto i = m["Col1"];
+    auto *p = std::get_if<std::vector<int>>(&m["Col1"]);
+    std::cout << getv(m["Col1"])[0];
+
+
+    std::cout << (*p)[2] << std::endl;
+
+    std::get<std::vector<int>>(m["Col1"]).push_back(30);
 
     std::cout << std::get<std::vector<int>>(m["Col1"])[0] << std::endl;
 
@@ -21,12 +62,22 @@ int main() {
     };
     D["Coluna"].push_back(20.0);
 
-    for (auto j: D["Coluna"]) {
-        if (typeid(double) == j.type() ) {
-            std::cout << std::any_cast<double>(j) << std::endl;
-            std::cout << j.type().name() << std::endl;
-        }
+    std::map<std::string, std::vector<std::variant<int, std::string, double>>> V;
+    V["Col1"] = {10,10};
+//    V["Col1"][0] =  std::visit(["Col1"][0]) + 30;
+
+    for (auto& v: V["Col1"]) {
+        std::visit([](auto&& arg){
+            std::cout << arg << std::endl;
+            }, v);
     }
+
+//    for (auto j: D["Coluna"]) {
+//        if (typeid(double) == j.type() ) {
+//            std::cout << std::any_cast<double>(j) << std::endl;
+//            std::cout << j.type().name() << std::endl;
+//        }
+//    }
 //    m["Coluna2"] = {"Davi"};
 //    auto i = m.at("Coluna");
 

@@ -70,13 +70,13 @@ int main() {
     df["Col1"] = coluna1;
 
     coluna coluna2;
-    coluna1.tipo = 'd';
-    coluna1.pcoluna = &preco;
+    coluna2.tipo = 'd';
+    coluna2.pcoluna = &preco;
     df["Col2"] = coluna2;
 
     coluna coluna3;
-    coluna1.tipo = 's';
-    coluna1.pcoluna = &nomes;
+    coluna3.tipo = 's';
+    coluna3.pcoluna = &nomes;
     df["Col3"] = coluna3;
 
     std::vector<std::variant<int,double, std::string>> row {77,57.2,"Teste"};
@@ -85,6 +85,7 @@ int main() {
     add_row(df, row);
     print_col(df["Col1"]);
     print_col(df["Col2"]);
+    print_col(df["Col3"]);
 
 
 

@@ -84,6 +84,12 @@
 				</MakeCommands>
 			</Target>
 		</Build>
+		<Unit filename="/home/davi/Dropbox/FGV/EMAp/EAP_Completo/Macaco/DataFrame.cpp">
+			<Option target="Macaco"/>
+		</Unit>
+		<Unit filename="/home/davi/Dropbox/FGV/EMAp/EAP_Completo/Macaco/DataFrame.h">
+			<Option target="Macaco"/>
+		</Unit>
 		<Unit filename="/home/davi/Dropbox/FGV/EMAp/EAP_Completo/Macaco/main.cpp">
 			<Option target="Macaco"/>
 		</Unit>

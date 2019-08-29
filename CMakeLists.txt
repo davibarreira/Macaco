@@ -3,4 +3,4 @@ project(Macaco)
 
 set(CMAKE_CXX_STANDARD 17)
 
-add_executable(Macaco main.cpp)
+add_executable(Macaco main.cpp DataFrame.cpp DataFrame.h)

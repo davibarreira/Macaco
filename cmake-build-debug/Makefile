@@ -123,6 +123,33 @@ Macaco/fast:
 	$(MAKE) -f CMakeFiles/Macaco.dir/build.make CMakeFiles/Macaco.dir/build
 .PHONY : Macaco/fast
 
+DataFrame.o: DataFrame.cpp.o
+
+.PHONY : DataFrame.o
+
+# target to build an object file
+DataFrame.cpp.o:
+	$(MAKE) -f CMakeFiles/Macaco.dir/build.make CMakeFiles/Macaco.dir/DataFrame.cpp.o
+.PHONY : DataFrame.cpp.o
+
+DataFrame.i: DataFrame.cpp.i
+
+.PHONY : DataFrame.i
+
+# target to preprocess a source file
+DataFrame.cpp.i:
+	$(MAKE) -f CMakeFiles/Macaco.dir/build.make CMakeFiles/Macaco.dir/DataFrame.cpp.i
+.PHONY : DataFrame.cpp.i
+
+DataFrame.s: DataFrame.cpp.s
+
+.PHONY : DataFrame.s
+
+# target to generate assembly for a file
+DataFrame.cpp.s:
+	$(MAKE) -f CMakeFiles/Macaco.dir/build.make CMakeFiles/Macaco.dir/DataFrame.cpp.s
+.PHONY : DataFrame.cpp.s
+
 main.o: main.cpp.o
 
 .PHONY : main.o
@@ -159,6 +186,9 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... Macaco"
 	@echo "... edit_cache"
+	@echo "... DataFrame.o"
+	@echo "... DataFrame.i"
+	@echo "... DataFrame.s"
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"

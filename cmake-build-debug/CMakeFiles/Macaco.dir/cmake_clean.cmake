@@ -1,5 +1,6 @@
 file(REMOVE_RECURSE
   "CMakeFiles/Macaco.dir/main.cpp.o"
+  "CMakeFiles/Macaco.dir/DataFrame.cpp.o"
   "Macaco.pdb"
   "Macaco"
 )

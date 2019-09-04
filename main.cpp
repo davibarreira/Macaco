@@ -14,6 +14,22 @@ struct coluna{
 
 };
 
+class DataFrame{
+public:
+
+    std::map<std::string, coluna> df;
+
+    template <typename T>
+    void InserirColuna(char tipo, std::vector<T> valores, std::string nome){
+        coluna coluna1;
+
+        coluna1.tipo = tipo;
+        coluna1.pcoluna = &valores;
+        df[nome] = coluna1;
+    }
+
+};
+
 void add_row(std::map<std::string, coluna> &dataframe, std::vector<std::variant<int,double, std::string>> row){
     int i = 0;
     for( auto const& [key, col] : dataframe ) {
@@ -33,16 +49,6 @@ void add_row(std::map<std::string, coluna> &dataframe, std::vector<std::variant<
 
 }
 
-template <typename tipo>
-tipo retornador(tipo valor){
-    tipo vetor;
-    return vetor;
-}
-
-template <typename tipo>
-void printador(std::vector<tipo> coluna){
-    std::cout << coluna[0] << "PRINTA";
-}
 
 
 void print_col(coluna col){
@@ -67,14 +73,15 @@ void print_col(coluna col){
 
 int main() {
 
+
     std::map<std::string, coluna> df;
 
-    std::map<std::string,std::vector<int>> ddd;
     std::vector<int> idade {11,10,2};
     std::vector<double> preco {1.0,5.2,2.2};
     std::vector<std::string> nomes {"Davi","Flavio"};
 
-    ddd["C1"] = idade;
+
+    DataFrame davi;
 
 
     coluna coluna1;
@@ -82,23 +89,13 @@ int main() {
     coluna1.pcoluna = &idade;
     df["Col1"] = coluna1;
 
-//    std::cout << (*df["Col1"].pcoluna)[0];
-    std::cout << (*static_cast<std::vector<int>*>(df["Col1"].pcoluna))[0] << "PRINTA";
+    davi.df["Col"] = coluna1;
 
-
-
+    davi.InserirColuna('i',idade, "idade");
+    print_col(davi.df["idade"]);
 
 
     std::vector<int>* ponteiro = &idade;
-
-    printador(*ponteiro);
-
-//    printador((*df["Col1"].pcoluna));
-
-//    printador(*static_cast<std::vector<int>*>(df["Col1"].pcoluna));
-
-
-//    std::cout << (*ponteiro)[0] << "PRINT";
 
     coluna coluna2;
     coluna2.tipo = 'd';
@@ -110,13 +107,14 @@ int main() {
     coluna3.pcoluna = &nomes;
     df["Col3"] = coluna3;
 
+//    std::cout << (*static_cast<std::vector<int>*>(df["Col1"].pcoluna))[0] << "PRINTA";
     std::vector<std::variant<int,double, std::string>> row {77,57.2,"Teste"};
 
 
     add_row(df, row);
-    print_col(df["Col1"]);
-    print_col(df["Col2"]);
-    print_col(df["Col3"]);
+//    print_col(df["Col1"]);
+//    print_col(df["Col2"]);
+//    print_col(df["Col3"]);
 
 
 

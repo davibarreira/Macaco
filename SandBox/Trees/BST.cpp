@@ -37,12 +37,12 @@ public:
         return "Hello";
     }
 
-    bool find(Tc x) {
+    bool find_node(Tc x) {
         Node<Tc> **p;
         return find(x, p);
     }
 
-    void insert(Tc x) {
+    void insert_node(Tc x) {
         Node<Tc> **p;
         if (!find(x, p)) {
             *p = new Node<Tc>(x);
@@ -107,7 +107,8 @@ BOOST_PYTHON_MODULE(BST)
 {
     class_<BST<int>>("BST",init<>())
     .def("greet",&BST<int>::greet)
-    .def("insert",&BST<int>::insert)
+    .def("insert",&BST<int>::insert_node)
+    .def("find",&BST<int>::find_node)
     ;
 
 }

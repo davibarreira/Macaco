@@ -33,7 +33,16 @@ void add_row(std::map<std::string, coluna> &dataframe, std::vector<std::variant<
 
 }
 
+template <typename tipo>
+tipo retornador(tipo valor){
+    tipo vetor;
+    return vetor;
+}
 
+template <typename tipo>
+void printador(std::vector<tipo> coluna){
+    std::cout << coluna[0] << "PRINTA";
+}
 
 
 void print_col(coluna col){
@@ -60,14 +69,36 @@ int main() {
 
     std::map<std::string, coluna> df;
 
+    std::map<std::string,std::vector<int>> ddd;
     std::vector<int> idade {11,10,2};
     std::vector<double> preco {1.0,5.2,2.2};
     std::vector<std::string> nomes {"Davi","Flavio"};
+
+    ddd["C1"] = idade;
+
 
     coluna coluna1;
     coluna1.tipo = 'i';
     coluna1.pcoluna = &idade;
     df["Col1"] = coluna1;
+
+//    std::cout << (*df["Col1"].pcoluna)[0];
+    std::cout << (*static_cast<std::vector<int>*>(df["Col1"].pcoluna))[0] << "PRINTA";
+
+
+
+
+
+    std::vector<int>* ponteiro = &idade;
+
+    printador(*ponteiro);
+
+//    printador((*df["Col1"].pcoluna));
+
+//    printador(*static_cast<std::vector<int>*>(df["Col1"].pcoluna));
+
+
+//    std::cout << (*ponteiro)[0] << "PRINT";
 
     coluna coluna2;
     coluna2.tipo = 'd';

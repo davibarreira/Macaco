@@ -33,6 +33,10 @@ public:
 
     BST():pRoot(nullptr) {}
 
+    std::string greet(){
+        return "Hello";
+    }
+
     bool find(Tc x) {
         Node<Tc> **p;
         return find(x, p);
@@ -102,6 +106,8 @@ using namespace boost::python;
 BOOST_PYTHON_MODULE(BST)
 {
     class_<BST<int>>("BST",init<>())
+    .def("greet",&BST<int>::greet)
+    .def("insert",&BST<int>::insert)
     ;
 
 }

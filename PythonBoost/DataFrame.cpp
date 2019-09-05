@@ -29,6 +29,8 @@ public:
 
     void PrintColunaCpp(std::string nome_coluna);
 
+    void PassColunaInt(std::string tipo, boost::python::list& l, std::string nome);
+
 };
 
 template <typename T>
@@ -78,6 +80,28 @@ void DataFrame::PrintColunaCpp(std::string nome_coluna){
     }
 }
 
+void DataFrame::PassColunaInt(std::string tipo, boost::python::list& l, std::string nome){
+    char t = tipo[0];
+    std::vector<int> w;
+    int token;
+    for (int i = 0; i < len(l) ; i++){
+        token = boost::python::extract<int>(l[i]);
+        w.push_back(token);
+    }
+    InserirColuna(t, w, nome);
+}
+
+
+// example of returning a python list
+boost::python::list get_chars(){
+    std::string word;
+    boost::python::list char_vec;
+    for (auto c : word){
+        char_vec.append(c);
+    }
+    return char_vec;
+}
+
 #include <boost/python.hpp>
 using namespace boost::python;
 
@@ -86,6 +110,9 @@ BOOST_PYTHON_MODULE(DataFrame)
     class_<DataFrame>("DataFrame",init<>())
     .def_readwrite("df", & DataFrame::df)
     .def("InserirColuna", & DataFrame::InserirColuna<int>)
+    .def("PassColunaInt", & DataFrame::PassColunaInt)
     ;
+
+    // def("pass_ints", pass_ints);
 
 }

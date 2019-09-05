@@ -20,6 +20,9 @@ struct coluna{
 class DataFrame{
 public:
 
+    std::vector<std::vector<int>> vector_i;
+    std::vector<std::vector<double>> vector_d;
+    std::vector<std::vector<std::string>> vector_s;
     std::map<std::string, coluna> df;
 
     int test=0;
@@ -98,7 +101,15 @@ void DataFrame::PassColunaInt(std::string tipo, boost::python::list& l, std::str
         token = boost::python::extract<int>(l[i]);
         w.push_back(token);
     }
-    InserirColuna(t, w, nome);
+    vector_i.push_back(w);
+
+    coluna coluna1;
+
+    coluna1.tipo = t;
+    coluna1.pcoluna = &vector_i[vector_i.size()-1];
+    df[nome] = coluna1;
+    test = (*static_cast<std::vector<int> *>(df[nome].pcoluna))[0];
+    // InserirColuna(t, vector_i[0], nome);
 }
 
 // boost::python::list DataFrame::RetunColunaInt(std::string coluna){

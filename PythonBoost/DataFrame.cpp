@@ -22,6 +22,8 @@ public:
 
     std::map<std::string, coluna> df;
 
+    int test=0;
+
     template <typename T>
     void InserirColuna(char tipo, std::vector<T> valores, std::string nome);
 
@@ -30,6 +32,11 @@ public:
     void PrintColunaCpp(std::string nome_coluna);
 
     void PassColunaInt(std::string tipo, boost::python::list& l, std::string nome);
+
+    // boost::python::list RetunColunaInt(std::string coluna);
+    int ReturnColunaInt(std::string nome);
+
+    std::string ExtractKeys();
 
 };
 
@@ -40,6 +47,8 @@ void DataFrame::InserirColuna(char tipo, std::vector<T> valores, std::string nom
     coluna1.tipo = tipo;
     coluna1.pcoluna = &valores;
     df[nome] = coluna1;
+    test = (*static_cast<std::vector<int> *>(df[nome].pcoluna))[0];
+
 }
 
 void DataFrame::AddRow(std::vector<std::variant<int,double, std::string>> row){
@@ -91,6 +100,25 @@ void DataFrame::PassColunaInt(std::string tipo, boost::python::list& l, std::str
     InserirColuna(t, w, nome);
 }
 
+// boost::python::list DataFrame::RetunColunaInt(std::string coluna){
+int DataFrame::ReturnColunaInt(std::string nome){
+    // boost::python::list int_vec;
+    std::vector<int> valores;
+    valores = (*static_cast<std::vector<int> *>(df["coluna"].pcoluna));
+    // for (auto i : valores){
+    //     int_vec.append(i);
+    // }
+    return 1;
+}
+
+std::string DataFrame::ExtractKeys() {
+    std::string retval;
+    for( auto const& [key, col] : df ) {
+        retval = key;
+  }
+  return retval;
+}
+
 
 // example of returning a python list
 boost::python::list get_chars(){
@@ -109,8 +137,10 @@ BOOST_PYTHON_MODULE(DataFrame)
 {
     class_<DataFrame>("DataFrame",init<>())
     .def_readwrite("df", & DataFrame::df)
-    .def("InserirColuna", & DataFrame::InserirColuna<int>)
     .def("PassColunaInt", & DataFrame::PassColunaInt)
+    .def("ReturnColunaInt", & DataFrame::ReturnColunaInt)
+    .def("ExtractKeys", & DataFrame::ExtractKeys)
+    .def_readwrite("test", & DataFrame::test)
     ;
 
     // def("pass_ints", pass_ints);

@@ -24,7 +24,7 @@ public:
 
     void AddRow(std::vector<std::variant<int,double, std::string>> row);
 
-    void PrintColuna(std::string nome_coluna);
+    void PrintColunaCpp(std::string nome_coluna);
 
 };
 
@@ -56,7 +56,7 @@ void DataFrame::AddRow(std::vector<std::variant<int,double, std::string>> row){
 
 }
 
-void DataFrame::PrintColuna(std::string nome_coluna){
+void DataFrame::PrintColunaCpp(std::string nome_coluna){
     coluna col = df[nome_coluna];
     switch (col.tipo)
     {
@@ -141,7 +141,11 @@ int main() {
     davi.AddRow(linha);
 
     davi.InserirColuna('i',idade, "idade");
-    davi.PrintColuna("idade");
+    davi.PrintColunaCpp("idade");
+
+    std::vector<int> valores;
+    valores = (*static_cast<std::vector<int> *>(davi.df["idade"].pcoluna));
+    std::cout << "ok"<<valores[0];
 //    print_col(davi.df["idade"]);
 
 
@@ -167,6 +171,12 @@ int main() {
 //    print_col(df["Col1"]);
 //    print_col(df["Col2"]);
 //    print_col(df["Col3"]);
+
+    std::string s = "davi";
+
+    char c = s[0];
+
+
 
 
 

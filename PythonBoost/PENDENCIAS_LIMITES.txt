@@ -1,2 +1,0 @@
-1. Não funciona com None (valores nulos)
-2. Somente string, int e double

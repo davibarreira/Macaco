@@ -31,6 +31,7 @@ public:
     void InserirColunaDouble(std::string coluna, std::vector<double> valores);
     void InserirColunaString(std::string coluna, std::vector<std::string> valores);
 
+    void RemoverColunaInt(std::string nome_coluna);
 
 };
 
@@ -46,6 +47,9 @@ void DataFrame::InserirColunaString(std::string coluna, std::vector<std::string>
     coluna_string[coluna] = valores;
 }
 
+void DataFrame::RemoverColunaInt(std::string nome_coluna){
+    coluna_int.erase(nome_coluna);
+}
 //
 //void DataFrame::AddRow(std::vector<std::variant<int,double, std::string>> row){
 //    int i = 0;
@@ -90,17 +94,23 @@ int main() {
 
 
 
-    std::vector<int> idade {11,10,2};
+    std::vector<int> idade {11,10,NULL};
     std::vector<int> qtd {5,7,8};
     std::vector<double> preco {1.0,5.2,2.2};
-    std::vector<std::string> nomes {"Davi","Flavio"};
+    std::vector<std::string> nomes {"Davi","Flavio",""};
 
 
     DataFrame davi;
 
     davi.InserirColunaInt("idade",idade);
+    davi.InserirColunaInt("outro",idade);
+    davi.InserirColunaString("nomes",nomes);
 
+    std::cout << davi.coluna_int["idade"][0];
 
+    davi.RemoverColunaInt("idade");
+
+    std::cout << davi.coluna_int["idade"][0];
 
     return 0;
 }

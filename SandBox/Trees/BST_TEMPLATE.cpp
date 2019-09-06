@@ -136,7 +136,6 @@ int main(){
     {
         cout << i << endl;
     }
-    std::cout << output[0] << std::endl;
 
     return 0;
 }

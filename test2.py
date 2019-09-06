@@ -1,4 +1,5 @@
 import Macaco as mc
+from matplotlib import pyplot as plt
 
 data = {'col_1': [3, 2, 1, 0], 'col_2': ['a', 'b', 'c', 'd']}
 df = mc.DataFrameMc(data)
@@ -26,6 +27,12 @@ row = {'col_1':[100,20],'col_3':['InserirLinha','Ok'],'col_4':[700.17,99]}
 df.InserirLinha(row)
 print(df.colunas)
 print(df.GetDados())
+
+df.InserirColuna([2.3,3.14,1,2.0,'davi','ok'],'col_4')
+print(df.GetDados())
+
+fig = df.scatter('col_1','col_3')
+plt.show()
 
 
 # for nome_coluna in df.colunas:

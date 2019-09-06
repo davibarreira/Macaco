@@ -1,4 +1,5 @@
 from DataFrame import *
+from matplotlib import pyplot as plt
 
 class DataFrameMc():
     """docstring for DataFrameMc"""
@@ -44,7 +45,7 @@ class DataFrameMc():
 
         else:
             if not all(isinstance(x, str) for x in valores):
-                valores_string = [str(i) for i in list(valores)]
+                valores = [str(i) for i in list(valores)]
             if self.shape == [0,0]:
                 self.df.InserirColunaString(valores,nome_coluna)
                 self.colunas[nome_coluna] ='string'
@@ -116,4 +117,8 @@ class DataFrameMc():
         self.shape[0] += num_linhas
 
 
+    def scatter(self,nome_coluna1,nome_coluna2):
+        x = self.GetColuna(nome_coluna1)
+        y = self.GetColuna(nome_coluna2)
+        plt.plot(x,y,'o')
     # def Query()

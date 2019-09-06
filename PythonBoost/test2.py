@@ -12,3 +12,5 @@ print(df.GetColuna('col_2'))
 
 df.RemoverColuna('col_2')
 print(df.GetColuna('col_2'))
+
+print(df.GetLoc([0,1,2],'col_1'))

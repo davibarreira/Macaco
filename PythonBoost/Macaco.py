@@ -9,7 +9,7 @@ class DataFrameMc():
 
         if dados != None:
             for coluna in dados:
-                self.InserirColuna(dados[coluna],coluna)
+                self.InserirColuna(dados[coluna],str(coluna))
 
 
     def InserirColuna(self,valores,nome_coluna):
@@ -72,6 +72,9 @@ class DataFrameMc():
             self.df.RemoverColunaDouble([],nome_coluna)
         elif self.colunas[nome_coluna] == 'string':
             self.df.RemoverColunaString([],nome_coluna)
+
+    def GetLoc(self,linhas, nome_coluna):
+        return self.df.GetLinhaInt(linhas, nome_coluna)
 
 
 

@@ -37,6 +37,7 @@ public:
     void RemoverColunaDouble(boost::python::list& l, std::string nome_coluna);
     void RemoverColunaString(boost::python::list& l, std::string nome_coluna);
 
+    boost::python::list GetLinhaInt(boost::python::list & linhas, std::string nome_coluna);
 
 };
 
@@ -93,6 +94,16 @@ boost::python::list DataFrame::GetColunaString(std::string nome_coluna){
     return l;
 }
 
+boost::python::list DataFrame::GetLinhaInt(boost::python::list & linhas, std::string nome_coluna){
+    boost::python::list saida;
+    int linha;
+    for (int i = 0; i < len(linhas) ; i++){
+        linha = boost::python::extract<int>(linhas[i]);
+        saida.append(coluna_int[nome_coluna][linha]);
+    }
+    return saida;
+}
+
 
 void DataFrame::RemoverColunaInt(boost::python::list& l, std::string nome_coluna){
     coluna_int.erase(nome_coluna);
@@ -129,6 +140,7 @@ BOOST_PYTHON_MODULE(DataFrame)
     .def("RemoverColunaInt", & DataFrame::RemoverColunaInt)
     .def("RemoverColunaDouble", & DataFrame::RemoverColunaDouble)
     .def("RemoverColunaString", & DataFrame::RemoverColunaString)
+    .def("GetLinhaInt", & DataFrame::GetLinhaInt)
     .def_readwrite("coluna_int", & DataFrame::coluna_int)
     ;
 

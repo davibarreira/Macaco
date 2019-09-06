@@ -62,8 +62,16 @@ class DataFrameMc():
             return self.df.GetColunaInt(nome_coluna)
         elif self.colunas[nome_coluna] == 'double':
             return self.df.GetColunaDouble(nome_coluna)
-        else:
+        elif self.colunas[nome_coluna] == 'string':
             return self.df.GetColunaString(nome_coluna)
+
+    def RemoverColuna(self,nome_coluna):
+        if self.colunas[nome_coluna] == 'int':
+            self.df.RemoverColunaInt([],nome_coluna)
+        elif self.colunas[nome_coluna] == 'double':
+            self.df.RemoverColunaDouble([],nome_coluna)
+        elif self.colunas[nome_coluna] == 'string':
+            self.df.RemoverColunaString([],nome_coluna)
 
 
 

@@ -5,7 +5,7 @@ class DataFrameMc():
     def __init__(self,dados=None):
         self.df      = DataFrame()
         self.colunas = {}
-        self.shape   = (0,0) # Quantidade de linhas x colunas
+        self.shape   = [0,0] # Quantidade de linhas x colunas
 
         if dados != None:
             for coluna in dados:
@@ -29,18 +29,33 @@ class DataFrameMc():
                 self.colunas[nome_coluna] ='int'
                 self.shape[1] += 1
 
-
         elif all(isinstance(x, (float,int)) for x in valores):
-            self.df.InserirColunaDouble(valores,nome_coluna)
-            self.colunas[nome_coluna] ='double'
+            if self.shape == [0,0]:
+                self.df.InserirColunaDouble(valores,nome_coluna)
+                self.colunas[nome_coluna] ='double'
+                self.shape[0] = len(valores)
+                self.shape[1] += 1
+            elif self.shape[0] != len(valores):
+                raise Exception("Coluna com tamanhos diferentes.")
+            else:
+                self.df.InserirColunaDouble(valores,nome_coluna)
+                self.colunas[nome_coluna] ='double'
+                self.shape[1] += 1
 
-        elif all(isinstance(x, str) for x in valores):
-            self.df.InserirColunaString(valores,nome_coluna)
-            self.colunas[nome_coluna] ='string'
         else:
-            valores_string = [str(i) for i in list(valores)]
-            self.df.InserirColunaString(valores_string,nome_coluna)
-            self.colunas[nome_coluna] ='string'
+            if not all(isinstance(x, str) for x in valores):
+                valores_string = [str(i) for i in list(valores)]
+            if self.shape == [0,0]:
+                self.df.InserirColunaString(valores,nome_coluna)
+                self.colunas[nome_coluna] ='string'
+                self.shape[0] = len(valores)
+                self.shape[1] += 1
+            elif self.shape[0] != len(valores):
+                raise Exception("Coluna com tamanhos diferentes.")
+            else:
+                self.df.InserirColunaString(valores,nome_coluna)
+                self.colunas[nome_coluna] ='string'
+                self.shape[1] += 1
 
     def GetColuna(self,nome_coluna):
         if self.colunas[nome_coluna] == 'int':

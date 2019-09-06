@@ -103,6 +103,9 @@ class DataFrameMc():
         return self.GetLinha(range(0,self.shape[0]))
 
     def InserirLinha(self,valores):
+        num_linhas = [len(valores[i]) for i in valores][0]
+        if len(set([len(valores[i]) for i in valores]))>1:
+            raise Exception("Colunas com tamanhos de linhas diferentes")
         for nome_coluna in self.colunas:
             if self.colunas[nome_coluna] == 'int':
                 self.df.InserirLinhaInt(valores[nome_coluna],nome_coluna)
@@ -110,7 +113,7 @@ class DataFrameMc():
                 self.df.InserirLinhaDouble(valores[nome_coluna],nome_coluna)
             elif self.colunas[nome_coluna] == 'string':
                 self.df.InserirLinhaString(valores[nome_coluna],nome_coluna)
-        self.shape[0] += 1
+        self.shape[0] += num_linhas
 
 
     # def Query()

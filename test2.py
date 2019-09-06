@@ -22,9 +22,11 @@ print(df.GetLoc([1,2,3],'col_4'))
 print(df.GetLinha([1,2]))
 print(df.GetDados())
 
-df.InserirLinha({'col_1':[1],'col_3':['InserirLinha'],'col_4':[700.17]})
+row = {'col_1':[100,20],'col_3':['InserirLinha','Ok'],'col_4':[700.17,99]}
+df.InserirLinha(row)
 print(df.colunas)
 print(df.GetDados())
+
 
 # for nome_coluna in df.colunas:
 #     print(nome_coluna)

@@ -73,8 +73,22 @@ class DataFrameMc():
         elif self.colunas[nome_coluna] == 'string':
             self.df.RemoverColunaString([],nome_coluna)
 
-    def GetLoc(self,linhas, nome_coluna):
-        return self.df.GetLinhaInt(linhas, nome_coluna)
+    def GetLoc(self,linha, nome_coluna):
+        linhas = []
+        if type(linha) == int:
+            linhas.append(linha)
+        else:
+            linhas = list(linha)
+
+        if max(linhas) > self.shape[0]-1:
+            raise Exception("Linha fornecida excedeu o DataFrame")
+
+        if self.colunas[nome_coluna] == 'int':
+            return self.df.GetLinhaInt(linhas, nome_coluna)
+        elif self.colunas[nome_coluna] == 'double':
+            return self.df.GetLinhaDouble(linhas, nome_coluna)
+        elif self.colunas[nome_coluna] == 'string':
+            return self.df.GetLinhaString(linhas, nome_coluna)
 
 
 

@@ -38,6 +38,8 @@ public:
     void RemoverColunaString(boost::python::list& l, std::string nome_coluna);
 
     boost::python::list GetLinhaInt(boost::python::list & linhas, std::string nome_coluna);
+    boost::python::list GetLinhaDouble(boost::python::list & linhas, std::string nome_coluna);
+    boost::python::list GetLinhaString(boost::python::list & linhas, std::string nome_coluna);
 
 };
 
@@ -104,6 +106,25 @@ boost::python::list DataFrame::GetLinhaInt(boost::python::list & linhas, std::st
     return saida;
 }
 
+boost::python::list DataFrame::GetLinhaDouble(boost::python::list & linhas, std::string nome_coluna){
+    boost::python::list saida;
+    int linha;
+    for (int i = 0; i < len(linhas) ; i++){
+        linha = boost::python::extract<int>(linhas[i]);
+        saida.append(coluna_double[nome_coluna][linha]);
+    }
+    return saida;
+}
+
+boost::python::list DataFrame::GetLinhaString(boost::python::list & linhas, std::string nome_coluna){
+    boost::python::list saida;
+    int linha;
+    for (int i = 0; i < len(linhas) ; i++){
+        linha = boost::python::extract<int>(linhas[i]);
+        saida.append(coluna_string[nome_coluna][linha]);
+    }
+    return saida;
+}
 
 void DataFrame::RemoverColunaInt(boost::python::list& l, std::string nome_coluna){
     coluna_int.erase(nome_coluna);
@@ -114,14 +135,6 @@ void DataFrame::RemoverColunaDouble(boost::python::list& l, std::string nome_col
 void DataFrame::RemoverColunaString(boost::python::list& l, std::string nome_coluna){
     coluna_string.erase(nome_coluna);
 }
-
-// std::string DataFrame::ExtractKeys() {
-//     std::string retval;
-//     for( auto const& [key, col] : df ) {
-//         retval = key;
-//   }
-//   return retval;
-// }
 
 
 #include <boost/python.hpp>
@@ -141,6 +154,8 @@ BOOST_PYTHON_MODULE(DataFrame)
     .def("RemoverColunaDouble", & DataFrame::RemoverColunaDouble)
     .def("RemoverColunaString", & DataFrame::RemoverColunaString)
     .def("GetLinhaInt", & DataFrame::GetLinhaInt)
+    .def("GetLinhaDouble", & DataFrame::GetLinhaDouble)
+    .def("GetLinhaString", & DataFrame::GetLinhaString)
     .def_readwrite("coluna_int", & DataFrame::coluna_int)
     ;
 

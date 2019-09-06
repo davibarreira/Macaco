@@ -1,3 +1,4 @@
+
 #include <iostream>
 #include <string>
 #include <vector>
@@ -15,168 +16,89 @@ struct coluna{
 };
 
 class DataFrame{
+private:
+
+
 public:
 
-    std::map<std::string, coluna> df;
+    std::map<std::string, std::vector<int>> coluna_int;
+    std::map<std::string,std::vector<double>> coluna_double;
+    std::map<std::string,std::vector<std::string>> coluna_string;
 
-    template <typename T>
-    void InserirColuna(char tipo, std::vector<T> valores, std::string nome);
 
-    void AddRow(std::vector<std::variant<int,double, std::string>> row);
 
-    void PrintColunaCpp(std::string nome_coluna);
+    void InserirColunaInt(std::string coluna, std::vector<int> valores);
+    void InserirColunaDouble(std::string coluna, std::vector<double> valores);
+    void InserirColunaString(std::string coluna, std::vector<std::string> valores);
+
 
 };
 
-template <typename T>
-void DataFrame::InserirColuna(char tipo, std::vector<T> valores, std::string nome){
-    coluna coluna1;
-
-    coluna1.tipo = tipo;
-    coluna1.pcoluna = &valores;
-    df[nome] = coluna1;
+void DataFrame::InserirColunaInt(std::string coluna, std::vector<int> valores){
+    coluna_int[coluna] = valores;
 }
 
-void DataFrame::AddRow(std::vector<std::variant<int,double, std::string>> row){
-    int i = 0;
-    for( auto const& [key, col] : df ) {
-        switch (col.tipo) {
-            case 's':
-                (*static_cast<std::vector<std::string> *>(col.pcoluna)).push_back(std::get<std::string>(row[i]));
-                break;
-            case 'i':
-                (*static_cast<std::vector<int> *>(col.pcoluna)).push_back(std::get<int>(row[i]));
-                break;
-            case 'd':
-                (*static_cast<std::vector<double> *>(col.pcoluna)).push_back(std::get<double>(row[i]));
-                break;
-        }
-        i++;
-    }
-
+void DataFrame::InserirColunaDouble(std::string coluna, std::vector<double> valores){
+    coluna_double[coluna] = valores;
 }
 
-void DataFrame::PrintColunaCpp(std::string nome_coluna){
-    coluna col = df[nome_coluna];
-    switch (col.tipo)
-    {
-        case 's':
-            for(auto i: (*static_cast<std::vector<std::string>*>(col.pcoluna)))
-                std::cout << i << std::endl;
-            break;
-        case 'i':
-            for(auto i: (*static_cast<std::vector<int>*>(col.pcoluna)))
-                std::cout << i << std::endl;
-            break;
-        case 'd':
-            for(auto i: (*static_cast<std::vector<double>*>(col.pcoluna)))
-                std::cout << i << std::endl;
-            break;
-    }
+void DataFrame::InserirColunaString(std::string coluna, std::vector<std::string> valores){
+    coluna_string[coluna] = valores;
 }
 
-void add_row(std::map<std::string, coluna> &dataframe, std::vector<std::variant<int,double, std::string>> row){
-    int i = 0;
-    for( auto const& [key, col] : dataframe ) {
-        switch (col.tipo) {
-            case 's':
-                (*static_cast<std::vector<std::string> *>(col.pcoluna)).push_back(std::get<std::string>(row[i]));
-                break;
-            case 'i':
-                (*static_cast<std::vector<int> *>(col.pcoluna)).push_back(std::get<int>(row[i]));
-                break;
-            case 'd':
-                (*static_cast<std::vector<double> *>(col.pcoluna)).push_back(std::get<double>(row[i]));
-                break;
-        }
-        i++;
-    }
-
-}
-
-
-
-void print_col(coluna col){
-    switch (col.tipo)
-    {
-        case 's':
-            for(auto i: (*static_cast<std::vector<std::string>*>(col.pcoluna)))
-                std::cout << i << std::endl;
-            break;
-        case 'i':
-            for(auto i: (*static_cast<std::vector<int>*>(col.pcoluna)))
-                std::cout << i << std::endl;
-            break;
-        case 'd':
-            for(auto i: (*static_cast<std::vector<double>*>(col.pcoluna)))
-                std::cout << i << std::endl;
-            break;
-    }
-}
-
+//
+//void DataFrame::AddRow(std::vector<std::variant<int,double, std::string>> row){
+//    int i = 0;
+//    for( auto const& [key, col] : df ) {
+//        switch (col.tipo) {
+//            case 's':
+//                (*static_cast<std::vector<std::string> *>(col.pcoluna)).push_back(std::get<std::string>(row[i]));
+//                break;
+//            case 'i':
+//                (*static_cast<std::vector<int> *>(col.pcoluna)).push_back(std::get<int>(row[i]));
+//                break;
+//            case 'd':
+//                (*static_cast<std::vector<double> *>(col.pcoluna)).push_back(std::get<double>(row[i]));
+//                break;
+//        }
+//        i++;
+//    }
+//
+//}
+//
+//void DataFrame::PrintColuna(std::string nome_coluna){
+//    coluna col = df[nome_coluna];
+//    switch (col.tipo)
+//    {
+//        case 's':
+//            for(auto i: (*static_cast<std::vector<std::string>*>(col.pcoluna)))
+//                std::cout << i << std::endl;
+//            break;
+//        case 'i':
+//            for(auto i: (*static_cast<std::vector<int>*>(col.pcoluna)))
+//                std::cout << i << std::endl;
+//            break;
+//        case 'd':
+//            for(auto i: (*static_cast<std::vector<double>*>(col.pcoluna)))
+//                std::cout << i << std::endl;
+//            break;
+//    }
+//}
 
 
 int main() {
 
 
-    std::map<std::string, coluna> df;
 
     std::vector<int> idade {11,10,2};
+    std::vector<int> qtd {5,7,8};
     std::vector<double> preco {1.0,5.2,2.2};
     std::vector<std::string> nomes {"Davi","Flavio"};
 
 
     DataFrame davi;
 
-
-    coluna coluna1;
-    coluna1.tipo = 'i';
-    coluna1.pcoluna = &idade;
-    df["Col1"] = coluna1;
-
-    std::vector<std::variant<int,double, std::string>> linha {77};
-
-    davi.df["Col"] = coluna1;
-    add_row(davi.df, linha);
-    davi.AddRow(linha);
-
-    davi.InserirColuna('i',idade, "idade");
-    davi.PrintColunaCpp("idade");
-
-    std::vector<int> valores;
-    valores = (*static_cast<std::vector<int> *>(davi.df["idade"].pcoluna));
-    std::cout << "ok"<<valores[0];
-//    print_col(davi.df["idade"]);
-
-
-
-
-    std::vector<int>* ponteiro = &idade;
-
-    coluna coluna2;
-    coluna2.tipo = 'd';
-    coluna2.pcoluna = &preco;
-    df["Col2"] = coluna2;
-
-    coluna coluna3;
-    coluna3.tipo = 's';
-    coluna3.pcoluna = &nomes;
-    df["Col3"] = coluna3;
-
-//    std::cout << (*static_cast<std::vector<int>*>(df["Col1"].pcoluna))[0] << "PRINTA";
-    std::vector<std::variant<int,double, std::string>> row {77,57.2,"Teste"};
-
-
-    add_row(df, row);
-//    print_col(df["Col1"]);
-//    print_col(df["Col2"]);
-//    print_col(df["Col3"]);
-
-    std::string s = "davi";
-
-    char c = s[0];
-
-
+    davi.InserirColunaInt("idade",idade);
 
 
 

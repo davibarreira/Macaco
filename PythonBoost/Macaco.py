@@ -68,10 +68,13 @@ class DataFrameMc():
     def RemoverColuna(self,nome_coluna):
         if self.colunas[nome_coluna] == 'int':
             self.df.RemoverColunaInt([],nome_coluna)
+            self.colunas.pop(nome_coluna)
         elif self.colunas[nome_coluna] == 'double':
             self.df.RemoverColunaDouble([],nome_coluna)
+            self.colunas.pop(nome_coluna)
         elif self.colunas[nome_coluna] == 'string':
             self.df.RemoverColunaString([],nome_coluna)
+            self.colunas.pop(nome_coluna)
 
     def GetLoc(self,linha, nome_coluna):
         linhas = []
@@ -89,6 +92,13 @@ class DataFrameMc():
             return self.df.GetLinhaDouble(linhas, nome_coluna)
         elif self.colunas[nome_coluna] == 'string':
             return self.df.GetLinhaString(linhas, nome_coluna)
+
+    def GetLinha(self, linha):
+        resultado = {k: [] for k in self.colunas}
+        for nome_coluna in self.colunas:
+            resultado[nome_coluna].append(self.GetLoc(linha, nome_coluna))
+        return resultado
+
 
 
 

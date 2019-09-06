@@ -23,6 +23,8 @@ public:
     std::map<std::string,std::vector<double>> coluna_double;
     std::map<std::string,std::vector<std::string>> coluna_string;
 
+    std::string check = "nada";
+
     void InserirColunaInt(boost::python::list& l, std::string nome_coluna);
     void InserirColunaDouble(boost::python::list& l, std::string nome_coluna);
     void InserirColunaString(boost::python::list& l, std::string nome_coluna);
@@ -31,7 +33,10 @@ public:
     boost::python::list GetColunaDouble(std::string nome_coluna);
     boost::python::list GetColunaString(std::string nome_coluna);
 
-    std::string ExtractKeys();
+    void RemoverColunaInt(boost::python::list& l, std::string nome_coluna);
+    void RemoverColunaDouble(std::string nome_coluna);
+    void RemoverColunaString(std::string nome_coluna);
+
 
 };
 
@@ -88,6 +93,17 @@ boost::python::list DataFrame::GetColunaString(std::string nome_coluna){
     return l;
 }
 
+
+void DataFrame::RemoverColunaInt(boost::python::list& l, std::string nome_coluna){
+    coluna_int.erase(nome_coluna);
+}
+void DataFrame::RemoverColunaDouble(std::string nome_coluna){
+    coluna_double.erase(nome_coluna);
+}
+void DataFrame::RemoverColunaString(std::string nome_coluna){
+    coluna_double.erase(nome_coluna);
+}
+
 // std::string DataFrame::ExtractKeys() {
 //     std::string retval;
 //     for( auto const& [key, col] : df ) {
@@ -103,12 +119,16 @@ using namespace boost::python;
 BOOST_PYTHON_MODULE(DataFrame)
 {
     class_<DataFrame>("DataFrame",init<>())
+    .def_readwrite("check", & DataFrame::check)
     .def("InserirColunaInt", & DataFrame::InserirColunaInt)
     .def("InserirColunaDouble", & DataFrame::InserirColunaDouble)
     .def("InserirColunaString", & DataFrame::InserirColunaString)
     .def("GetColunaInt", & DataFrame::GetColunaInt)
     .def("GetColunaDouble", & DataFrame::GetColunaDouble)
     .def("GetColunaString", & DataFrame::GetColunaString)
+    .def("RemoverColunaInt", & DataFrame::RemoverColunaInt)
+    .def("RemoverColunaDouble", & DataFrame::RemoverColunaDouble)
+    .def("RemoverColunaInt", & DataFrame::RemoverColunaString)
     .def_readwrite("coluna_int", & DataFrame::coluna_int)
     ;
 

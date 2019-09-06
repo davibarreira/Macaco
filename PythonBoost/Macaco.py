@@ -99,6 +99,10 @@ class DataFrameMc():
             resultado[nome_coluna].append(self.GetLoc(linha, nome_coluna))
         return resultado
 
+    def GetDados(self):
+        return self.GetLinha(range(0,self.shape[0]))
+
+
 
 
 

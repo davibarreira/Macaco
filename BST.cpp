@@ -2,8 +2,11 @@
 #include <iomanip>
 #include <vector>
 #include <initializer_list>
+#include <boost/python.hpp>
+#include <boost/python/list.hpp>
+#include <boost/python/extract.hpp>
 
-#include <set>
+
 #include <string>
 
 
@@ -32,7 +35,7 @@ public:
 
     BST():pRoot(nullptr) {}
 
-    bool find(Tc x) {
+    bool find_node(Tc x) {
         Node<Tc> **p;
         return find(x, p);
     }
@@ -43,7 +46,7 @@ public:
         return (*p)->rows;
     }
 
-    void insert_with_row(Tc x, int row) {
+    void insert_node_with_row(Tc x, int row) {
         Node<Tc> **p;
         if (!find(x, p)) {
             *p = new Node<Tc>(x);
@@ -51,7 +54,7 @@ public:
         (*p)->rows.insert(row);
     }
 
-    void insert(Tc x) {
+    void insert_node(Tc x) {
         Node<Tc> **p;
         if (!find(x, p)) {
             *p = new Node<Tc>(x);
@@ -108,27 +111,3 @@ private:
         }
     }
 };
-
-
-int main(){
-
-    BST<int> tree;
-
-    tree.insert(10);
-    tree.insert(10);
-    tree.insert(1);
-    tree.insert(8);
-    tree.insert(80);
-    tree.insert_with_row(5, 1);
-    tree.insert_with_row(5, 1);
-    tree.insert_with_row(5, 10);
-    tree.insert_with_row(5, 2);
-    tree.insert_with_row(1, 1);
-    tree.remove(10);
-    tree.print();
-    cout << tree.get_node(5).size()<<endl;
-    cout << tree.get_node(1).size()<<endl;
-    cout << tree.get_node(80).size()<<endl;
-
-    return 0;
-}

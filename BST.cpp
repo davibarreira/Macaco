@@ -6,8 +6,8 @@
 #include <boost/python/list.hpp>
 #include <boost/python/extract.hpp>
 
-
 #include <string>
+#include <set>
 
 
 using namespace std;
@@ -15,7 +15,7 @@ using namespace std;
 template<typename T>
 struct Node {
     T data;
-    set<int> rows;
+    std::set<int> rows;
 
     Node *pChild[2];
     Node(T x):data(x) {
@@ -40,7 +40,7 @@ public:
         return find(x, p);
     }
 
-    set<int> get_node(Tc x) {
+    std::set<int> get_node_rows(Tc x) {
         Node<Tc> **p;
         find(x, p);
         return (*p)->rows;

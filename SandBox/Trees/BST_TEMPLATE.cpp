@@ -126,9 +126,17 @@ int main(){
     tree.insert_with_row(1, 1);
     tree.remove(10);
     tree.print();
+    std::set<int> s = tree.get_node(5);
+    std::vector<int> output(s.begin(), s.end());
     cout << tree.get_node(5).size()<<endl;
     cout << tree.get_node(1).size()<<endl;
     cout << tree.get_node(80).size()<<endl;
+
+    for (auto i: output)
+    {
+        cout << i << endl;
+    }
+    std::cout << output[0] << std::endl;
 
     return 0;
 }

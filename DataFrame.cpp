@@ -12,19 +12,15 @@
 #include <boost/python/extract.hpp>
 
 
-struct coluna{
-    char tipo;
-    void * pcoluna;
-
-};
-
 class DataFrame{
 public:
     std::map<std::string, std::vector<int>> coluna_int;
     std::map<std::string,std::vector<double>> coluna_double;
     std::map<std::string,std::vector<std::string>> coluna_string;
+    std::map<std::string,BST<int>> int_trees;
+    std::map<std::string,BST<double>> double_trees;
+    std::map<std::string,BST<std::string>> string_trees;
 
-    std::string check = "nada";
 
     void InserirColunaInt(boost::python::list& l, std::string nome_coluna);
     void InserirColunaDouble(boost::python::list& l, std::string nome_coluna);
@@ -163,7 +159,6 @@ using namespace boost::python;
 BOOST_PYTHON_MODULE(DataFrame)
 {
     class_<DataFrame>("DataFrame",init<>())
-    .def_readwrite("check", & DataFrame::check)
     .def("InserirColunaInt", & DataFrame::InserirColunaInt)
     .def("InserirColunaDouble", & DataFrame::InserirColunaDouble)
     .def("InserirColunaString", & DataFrame::InserirColunaString)

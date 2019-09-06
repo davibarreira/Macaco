@@ -23,23 +23,19 @@ public:
     std::map<std::string,std::vector<double>> coluna_double;
     std::map<std::string,std::vector<std::string>> coluna_string;
 
+    void InserirColunaInt(boost::python::list& l, std::string nome_coluna);
+    void InserirColunaDouble(boost::python::list& l, std::string nome_coluna);
+    void InserirColunaString(boost::python::list& l, std::string nome_coluna);
 
-
-    int test=0;
-    char t='x';
-
-
-    void PassColunaInt(boost::python::list& l, std::string nome_coluna);
-
-    // boost::python::list RetunColunaInt(std::string coluna);
-    int ReturnColunaInt(std::string nome_coluna);
+    boost::python::list GetColunaInt(std::string nome_coluna);
+    boost::python::list GetColunaDouble(std::string nome_coluna);
+    boost::python::list GetColunaString(std::string nome_coluna);
 
     std::string ExtractKeys();
 
 };
 
-
-void DataFrame::PassColunaInt(boost::python::list& l, std::string nome_coluna){
+void DataFrame::InserirColunaInt(boost::python::list& l, std::string nome_coluna){
     std::vector<int> w;
     int token;
     for (int i = 0; i < len(l) ; i++){
@@ -47,17 +43,49 @@ void DataFrame::PassColunaInt(boost::python::list& l, std::string nome_coluna){
         w.push_back(token);
     }
     coluna_int[nome_coluna] = w;
-
+}
+void DataFrame::InserirColunaDouble(boost::python::list& l, std::string nome_coluna){
+    std::vector<double> w;
+    double token;
+    for (int i = 0; i < len(l) ; i++){
+        token = boost::python::extract<double>(l[i]);
+        w.push_back(token);
+    }
+    coluna_double[nome_coluna] = w;
+}
+void DataFrame::InserirColunaString(boost::python::list& l, std::string nome_coluna){
+    std::vector<std::string> w;
+    std::string token;
+    for (int i = 0; i < len(l) ; i++){
+        token = boost::python::extract<std::string>(l[i]);
+        w.push_back(token);
+    }
+    coluna_string[nome_coluna] = w;
 }
 
-// boost::python::list DataFrame::RetunColunaInt(std::string coluna){
-int DataFrame::ReturnColunaInt(std::string nome_coluna){
-    // boost::python::list int_vec;
-    // std::vector<int> valores;
-    int valor;
-
-    valor = coluna_int[nome_coluna][0];
-    return valor;
+boost::python::list DataFrame::GetColunaInt(std::string nome_coluna){
+    boost::python::list l;
+    for (auto i: coluna_int[nome_coluna])
+    {
+        l.append(i);
+    }
+    return l;
+}
+boost::python::list DataFrame::GetColunaDouble(std::string nome_coluna){
+    boost::python::list l;
+    for (auto i: coluna_double[nome_coluna])
+    {
+        l.append(i);
+    }
+    return l;
+}
+boost::python::list DataFrame::GetColunaString(std::string nome_coluna){
+    boost::python::list l;
+    for (auto i: coluna_string[nome_coluna])
+    {
+        l.append(i);
+    }
+    return l;
 }
 
 // std::string DataFrame::ExtractKeys() {
@@ -69,25 +97,18 @@ int DataFrame::ReturnColunaInt(std::string nome_coluna){
 // }
 
 
-// example of returning a python list
-boost::python::list get_chars(){
-    std::string word;
-    boost::python::list char_vec;
-    for (auto c : word){
-        char_vec.append(c);
-    }
-    return char_vec;
-}
-
 #include <boost/python.hpp>
 using namespace boost::python;
 
 BOOST_PYTHON_MODULE(DataFrame)
 {
     class_<DataFrame>("DataFrame",init<>())
-    .def("PassColunaInt", & DataFrame::PassColunaInt)
-    .def("ReturnColunaInt", & DataFrame::ReturnColunaInt)
-    .def_readwrite("test", & DataFrame::test)
+    .def("InserirColunaInt", & DataFrame::InserirColunaInt)
+    .def("InserirColunaDouble", & DataFrame::InserirColunaDouble)
+    .def("InserirColunaString", & DataFrame::InserirColunaString)
+    .def("GetColunaInt", & DataFrame::GetColunaInt)
+    .def("GetColunaDouble", & DataFrame::GetColunaDouble)
+    .def("GetColunaString", & DataFrame::GetColunaString)
     .def_readwrite("coluna_int", & DataFrame::coluna_int)
     ;
 

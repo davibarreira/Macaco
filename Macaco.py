@@ -102,12 +102,15 @@ class DataFrameMc():
     def GetDados(self):
         return self.GetLinha(range(0,self.shape[0]))
 
+    def InserirLinha(self,valores):
+        for nome_coluna in self.colunas:
+            if self.colunas[nome_coluna] == 'int':
+                self.df.InserirLinhaInt(valores[nome_coluna],nome_coluna)
+            elif self.colunas[nome_coluna] == 'double':
+                self.df.InserirLinhaDouble(valores[nome_coluna],nome_coluna)
+            elif self.colunas[nome_coluna] == 'string':
+                self.df.InserirLinhaString(valores[nome_coluna],nome_coluna)
+        self.shape[0] += 1
 
 
-
-
-
-    # def GetLinha(linha)
-    # def GetColuna(coluna)
-    # def GetLoc(linha,coluna)
     # def Query()

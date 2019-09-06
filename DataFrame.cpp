@@ -5,6 +5,7 @@
 #include <any>
 #include <variant>
 #include <tuple>
+#include "BST.cpp"
 
 #include <boost/python.hpp>
 #include <boost/python/list.hpp>
@@ -41,6 +42,9 @@ public:
     boost::python::list GetLinhaDouble(boost::python::list & linhas, std::string nome_coluna);
     boost::python::list GetLinhaString(boost::python::list & linhas, std::string nome_coluna);
 
+    void InserirLinhaInt(boost::python::list& l, std::string nome_coluna);
+    void InserirLinhaDouble(boost::python::list& l, std::string nome_coluna);
+    void InserirLinhaString(boost::python::list& l, std::string nome_coluna);
 };
 
 void DataFrame::InserirColunaInt(boost::python::list& l, std::string nome_coluna){
@@ -136,6 +140,22 @@ void DataFrame::RemoverColunaString(boost::python::list& l, std::string nome_col
     coluna_string.erase(nome_coluna);
 }
 
+void DataFrame::InserirLinhaInt(boost::python::list& l, std::string nome_coluna){
+    for (int i = 0; i < len(l) ; i++){
+           coluna_int[nome_coluna].push_back(boost::python::extract<int>(l[i]));
+       }
+}
+void DataFrame::InserirLinhaDouble(boost::python::list& l, std::string nome_coluna){
+    for (int i = 0; i < len(l) ; i++){
+           coluna_double[nome_coluna].push_back(boost::python::extract<double>(l[i]));
+       }
+}
+void DataFrame::InserirLinhaString(boost::python::list& l, std::string nome_coluna){
+    for (int i = 0; i < len(l) ; i++){
+           coluna_string[nome_coluna].push_back(boost::python::extract<std::string>(l[i]));
+       }
+}
+
 
 #include <boost/python.hpp>
 using namespace boost::python;
@@ -156,6 +176,9 @@ BOOST_PYTHON_MODULE(DataFrame)
     .def("GetLinhaInt", & DataFrame::GetLinhaInt)
     .def("GetLinhaDouble", & DataFrame::GetLinhaDouble)
     .def("GetLinhaString", & DataFrame::GetLinhaString)
+    .def("InserirLinhaInt", & DataFrame::InserirLinhaInt)
+    .def("InserirLinhaDouble", & DataFrame::InserirLinhaDouble)
+    .def("InserirLinhaString", & DataFrame::InserirLinhaString)
     .def_readwrite("coluna_int", & DataFrame::coluna_int)
     ;
 

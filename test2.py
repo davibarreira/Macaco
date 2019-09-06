@@ -13,12 +13,17 @@ print(df.GetColuna('col_2'))
 
 df.RemoverColuna('col_2')
 # print(df.GetColuna('col_2'))
+print(df.colunas)
 
 print(df.GetLoc([0,1,2],'col_1'))
 print(df.GetLoc(0,'col_3'))
 print(df.shape)
 print(df.GetLoc([1,2,3],'col_4'))
 print(df.GetLinha([1,2]))
+print(df.GetDados())
+
+df.InserirLinha({'col_1':[1],'col_3':['InserirLinha'],'col_4':[700.17]})
+print(df.colunas)
 print(df.GetDados())
 
 # for nome_coluna in df.colunas:

@@ -41,6 +41,11 @@ public:
     void InserirLinhaInt(boost::python::list& l, std::string nome_coluna);
     void InserirLinhaDouble(boost::python::list& l, std::string nome_coluna);
     void InserirLinhaString(boost::python::list& l, std::string nome_coluna);
+
+    void IndexarColunaInt(std::string nome_coluna);
+
+    boost::python::list GetNodeRowsInt(boost::python::list & nodes, std::string nome_coluna);
+
 };
 
 void DataFrame::InserirColunaInt(boost::python::list& l, std::string nome_coluna){
@@ -150,6 +155,33 @@ void DataFrame::InserirLinhaString(boost::python::list& l, std::string nome_colu
     for (int i = 0; i < len(l) ; i++){
            coluna_string[nome_coluna].push_back(boost::python::extract<std::string>(l[i]));
        }
+}
+
+void DataFrame::IndexarColunaInt(std::string nome_coluna){
+    BST<int> tree;
+    for (int i = 0; i < coluna_int[nome_coluna].size(); ++i)
+    {
+        tree.insert_node_with_row(coluna_int[nome_coluna][i],i);
+    }
+    int_trees[nome_coluna] = tree;
+}
+
+boost::python::list DataFrame::GetNodeRowsInt(boost::python::list & nodes, std::string nome_coluna){
+    std::vector<int> output;
+    std::set<int> s;
+    int w;
+    boost::python::list saida;
+
+    for (int i = 0; i < len(nodes) ; i++){
+        w = boost::python::extract<int>(nodes[i]);
+        s = int_trees[nome_coluna].get_node_rows(w);
+        output.insert(output.end(), s.begin(), s.end());
+    }
+    for (int i = 0; i < output.size() ; i++)
+    {
+        saida.append(output[i]);
+    }
+    return saida;
 }
 
 

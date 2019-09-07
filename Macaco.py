@@ -1,5 +1,5 @@
 from DataFrame import *
-from matplotlib import pyplot as plt
+#from matplotlib import pyplot as plt
 
 class DataFrameMc():
     """docstring for DataFrameMc"""
@@ -70,12 +70,15 @@ class DataFrameMc():
         if self.colunas[nome_coluna] == 'int':
             self.df.RemoverColunaInt([],nome_coluna)
             self.colunas.pop(nome_coluna)
+            self.shape[1] = self.shape[1] - 1
         elif self.colunas[nome_coluna] == 'double':
             self.df.RemoverColunaDouble([],nome_coluna)
             self.colunas.pop(nome_coluna)
+            self.shape[1] = self.shape[1] - 1
         elif self.colunas[nome_coluna] == 'string':
             self.df.RemoverColunaString([],nome_coluna)
             self.colunas.pop(nome_coluna)
+            self.shape[1] = self.shape[1] - 1
 
     def GetLoc(self,linha, nome_coluna):
         linhas = []
@@ -116,9 +119,26 @@ class DataFrameMc():
                 self.df.InserirLinhaString(valores[nome_coluna],nome_coluna)
         self.shape[0] += num_linhas
 
+    def IndexarColuna(self, nome_coluna):
+        if self.colunas[nome_coluna] == 'int':
+            self.df.IndexarColunaInt([], nome_coluna)
+        elif self.colunas[nome_coluna] == 'double':
+            pass
+        elif self.colunas[nome_coluna] == 'string':
+            pass
 
-    def scatter(self,nome_coluna1,nome_coluna2):
-        x = self.GetColuna(nome_coluna1)
-        y = self.GetColuna(nome_coluna2)
-        plt.plot(x,y,'o')
+    def Query_test(self, valor,nome_coluna):
+        return self.df.GetNodeRowsInt(valor, nome_coluna)
+
+
+
+
     # def Query()
+
+
+    # Funções de Visualização dos Dados (gráficos)
+
+    # def Scatter(self,nome_coluna1,nome_coluna2):
+    #     x = self.GetColuna(nome_coluna1)
+    #     y = self.GetColuna(nome_coluna2)
+    #     plt.plot(x,y,'o')

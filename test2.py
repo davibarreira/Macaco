@@ -1,7 +1,7 @@
 import Macaco as mc
-from matplotlib import pyplot as plt
+#from matplotlib import pyplot as plt
 
-data = {'col_1': [3, 2, 1, 0], 'col_2': ['a', 'b', 'c', 'd']}
+data = {'col_1': [3, 3, 3, 0], 'col_2': ['a', 'b', 'c', 'd']}
 df = mc.DataFrameMc(data)
 
 
@@ -23,7 +23,7 @@ print(df.GetLoc([1,2,3],'col_4'))
 print(df.GetLinha([1,2]))
 print(df.GetDados())
 
-row = {'col_1':[100,20],'col_3':['InserirLinha','Ok'],'col_4':[700.17,99]}
+row = {'col_1':[100,3],'col_3':['InserirLinha','Ok'],'col_4':[700.17,99]}
 df.InserirLinha(row)
 print(df.colunas)
 print(df.GetDados())
@@ -31,8 +31,14 @@ print(df.GetDados())
 df.InserirColuna([2.3,3.14,1,2.0,'davi','ok'],'col_4')
 print(df.GetDados())
 
-fig = df.scatter('col_1','col_3')
-plt.show()
+df.IndexarColuna('col_1')
+
+print(df.Query_test([3],'col_1'))
+
+
+
+#fig = df.Scatter('col_1','col_3')
+#plt.show()
 
 
 # for nome_coluna in df.colunas:

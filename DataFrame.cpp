@@ -42,7 +42,7 @@ public:
     void InserirLinhaDouble(boost::python::list& l, std::string nome_coluna);
     void InserirLinhaString(boost::python::list& l, std::string nome_coluna);
 
-    void IndexarColunaInt(std::string nome_coluna);
+    void IndexarColunaInt(boost::python::list& l, std::string nome_coluna);
 
     boost::python::list GetNodeRowsInt(boost::python::list & nodes, std::string nome_coluna);
 
@@ -157,7 +157,7 @@ void DataFrame::InserirLinhaString(boost::python::list& l, std::string nome_colu
        }
 }
 
-void DataFrame::IndexarColunaInt(std::string nome_coluna){
+void DataFrame::IndexarColunaInt(boost::python::list & l,std::string nome_coluna){
     BST<int> tree;
     for (int i = 0; i < coluna_int[nome_coluna].size(); ++i)
     {
@@ -206,6 +206,8 @@ BOOST_PYTHON_MODULE(DataFrame)
     .def("InserirLinhaInt", & DataFrame::InserirLinhaInt)
     .def("InserirLinhaDouble", & DataFrame::InserirLinhaDouble)
     .def("InserirLinhaString", & DataFrame::InserirLinhaString)
+    .def("IndexarColunaInt", & DataFrame::IndexarColunaInt)
+    .def("GetNodeRowsInt", & DataFrame::GetNodeRowsInt)
     .def_readwrite("coluna_int", & DataFrame::coluna_int)
     ;
 

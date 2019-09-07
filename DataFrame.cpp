@@ -43,8 +43,12 @@ public:
     void InserirLinhaString(boost::python::list& l, std::string nome_coluna);
 
     void IndexarColunaInt(boost::python::list& l, std::string nome_coluna);
+    void IndexarColunaDouble(boost::python::list& l, std::string nome_coluna);
+    void IndexarColunaString(boost::python::list& l, std::string nome_coluna);
 
     boost::python::list GetNodeRowsInt(boost::python::list & nodes, std::string nome_coluna);
+    boost::python::list GetNodeRowsDouble(boost::python::list & nodes, std::string nome_coluna);
+    boost::python::list GetNodeRowsString(boost::python::list & nodes, std::string nome_coluna);
 
 };
 
@@ -165,6 +169,22 @@ void DataFrame::IndexarColunaInt(boost::python::list & l,std::string nome_coluna
     }
     int_trees[nome_coluna] = tree;
 }
+void DataFrame::IndexarColunaDouble(boost::python::list & l,std::string nome_coluna){
+    BST<double> tree;
+    for (int i = 0; i < coluna_double[nome_coluna].size(); ++i)
+    {
+        tree.insert_node_with_row(coluna_double[nome_coluna][i],i);
+    }
+    double_trees[nome_coluna] = tree;
+}
+void DataFrame::IndexarColunaString(boost::python::list & l,std::string nome_coluna){
+    BST<std::string> tree;
+    for (int i = 0; i < coluna_string[nome_coluna].size(); ++i)
+    {
+        tree.insert_node_with_row(coluna_string[nome_coluna][i],i);
+    }
+    string_trees[nome_coluna] = tree;
+}
 
 boost::python::list DataFrame::GetNodeRowsInt(boost::python::list & nodes, std::string nome_coluna){
     std::vector<int> output;
@@ -175,6 +195,41 @@ boost::python::list DataFrame::GetNodeRowsInt(boost::python::list & nodes, std::
     for (int i = 0; i < len(nodes) ; i++){
         w = boost::python::extract<int>(nodes[i]);
         s = int_trees[nome_coluna].get_node_rows(w);
+        output.insert(output.end(), s.begin(), s.end());
+    }
+    for (int i = 0; i < output.size() ; i++)
+    {
+        saida.append(output[i]);
+    }
+    return saida;
+}
+
+boost::python::list DataFrame::GetNodeRowsDouble(boost::python::list & nodes, std::string nome_coluna){
+    std::vector<int> output;
+    std::set<int> s;
+    double w;
+    boost::python::list saida;
+
+    for (int i = 0; i < len(nodes) ; i++){
+        w = boost::python::extract<double>(nodes[i]);
+        s = double_trees[nome_coluna].get_node_rows(w);
+        output.insert(output.end(), s.begin(), s.end());
+    }
+    for (int i = 0; i < output.size() ; i++)
+    {
+        saida.append(output[i]);
+    }
+    return saida;
+}
+boost::python::list DataFrame::GetNodeRowsString(boost::python::list & nodes, std::string nome_coluna){
+    std::vector<int> output;
+    std::set<int> s;
+    std::string w;
+    boost::python::list saida;
+
+    for (int i = 0; i < len(nodes) ; i++){
+        w = boost::python::extract<std::string>(nodes[i]);
+        s = string_trees[nome_coluna].get_node_rows(w);
         output.insert(output.end(), s.begin(), s.end());
     }
     for (int i = 0; i < output.size() ; i++)
@@ -207,7 +262,11 @@ BOOST_PYTHON_MODULE(DataFrame)
     .def("InserirLinhaDouble", & DataFrame::InserirLinhaDouble)
     .def("InserirLinhaString", & DataFrame::InserirLinhaString)
     .def("IndexarColunaInt", & DataFrame::IndexarColunaInt)
+    .def("IndexarColunaDouble", & DataFrame::IndexarColunaDouble)
+    .def("IndexarColunaString", & DataFrame::IndexarColunaString)
     .def("GetNodeRowsInt", & DataFrame::GetNodeRowsInt)
+    .def("GetNodeRowsDouble", & DataFrame::GetNodeRowsDouble)
+    .def("GetNodeRowsString", & DataFrame::GetNodeRowsString)
     .def_readwrite("coluna_int", & DataFrame::coluna_int)
     ;
 

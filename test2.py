@@ -7,7 +7,7 @@ df = mc.DataFrameMc(data)
 
 df.InserirColuna(['davi','b','z','z'],'col_3')
 df.InserirColuna([2.3,3.14,1,2.0],'col_2')
-df.InserirColuna([2.3,3.14,1,2.0],'col_4')
+df.InserirColuna([2.3,3.14,3.14,2.0],'col_4')
 
 print(df.GetColuna('col_1'))
 print(df.GetColuna('col_2'))
@@ -28,12 +28,16 @@ df.InserirLinha(row)
 print(df.colunas)
 print(df.GetDados())
 
-df.InserirColuna([2.3,3.14,1,2.0,'davi','ok'],'col_4')
+df.InserirColuna([2.3,3.14,1,2.0,'davi','ok'],'col_5')
 print(df.GetDados())
 
 df.IndexarColuna('col_1')
+df.IndexarColuna('col_3')
+df.IndexarColuna('col_4')
 
-print(df.Query_test([3],'col_1'))
+print(df.Query_Valor([3,100],'col_1'))
+print(df.Query_Valor(['z'],'col_3'))
+print(df.Query_Valor([3.14],'col_4'))
 
 
 

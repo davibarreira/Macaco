@@ -7,6 +7,7 @@ class DataFrameMc():
         self.df      = DataFrame()
         self.colunas = {}
         self.shape   = [0,0] # Quantidade de linhas x colunas
+        self.indices = []
 
         if dados != None:
             for coluna in dados:
@@ -122,13 +123,21 @@ class DataFrameMc():
     def IndexarColuna(self, nome_coluna):
         if self.colunas[nome_coluna] == 'int':
             self.df.IndexarColunaInt([], nome_coluna)
+            self.indices.append(nome_coluna)
         elif self.colunas[nome_coluna] == 'double':
-            pass
+            self.df.IndexarColunaDouble([], nome_coluna)
+            self.indices.append(nome_coluna)
         elif self.colunas[nome_coluna] == 'string':
-            pass
+            self.df.IndexarColunaString([], nome_coluna)
+            self.indices.append(nome_coluna)
 
-    def Query_test(self, valor,nome_coluna):
-        return self.df.GetNodeRowsInt(valor, nome_coluna)
+    def Query_Valor(self, valor,nome_coluna):
+        if self.colunas[nome_coluna] == 'int':
+            return self.df.GetNodeRowsInt(valor, nome_coluna)
+        elif self.colunas[nome_coluna] == 'double':
+            return self.df.GetNodeRowsDouble(valor, nome_coluna)
+        elif self.colunas[nome_coluna] == 'string':
+            return self.df.GetNodeRowsString(valor, nome_coluna)
 
 
 

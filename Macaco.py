@@ -133,11 +133,11 @@ class DataFrameMc():
 
     def Query_Valor(self, valor,nome_coluna):
         if self.colunas[nome_coluna] == 'int':
-            return self.df.GetNodeRowsInt(valor, nome_coluna)
+            return list(set(self.df.GetNodeRowsInt(valor, nome_coluna)))
         elif self.colunas[nome_coluna] == 'double':
-            return self.df.GetNodeRowsDouble(valor, nome_coluna)
+            return list(set(self.df.GetNodeRowsDouble(valor, nome_coluna)))
         elif self.colunas[nome_coluna] == 'string':
-            return self.df.GetNodeRowsString(valor, nome_coluna)
+            return list(set(self.df.GetNodeRowsString(valor, nome_coluna)))
 
 
 

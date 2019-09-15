@@ -153,17 +153,23 @@ void DataFrame::RemoverColunaString(boost::python::list& l, std::string nome_col
 
 void DataFrame::InserirLinhaInt(boost::python::list& l, std::string nome_coluna){
     for (int i = 0; i < len(l) ; i++){
-           coluna_int[nome_coluna].push_back(boost::python::extract<int>(l[i]));
+            coluna_int[nome_coluna].push_back(boost::python::extract<int>(l[i]));
+            if (int_trees.count(nome_coluna))
+                int_trees[nome_coluna].insert_node_with_row(boost::python::extract<int>(l[i]),coluna_int[nome_coluna].size()-1);
        }
 }
 void DataFrame::InserirLinhaDouble(boost::python::list& l, std::string nome_coluna){
     for (int i = 0; i < len(l) ; i++){
            coluna_double[nome_coluna].push_back(boost::python::extract<double>(l[i]));
+            if (double_trees.count(nome_coluna))
+                double_trees[nome_coluna].insert_node_with_row(boost::python::extract<double>(l[i]),coluna_double[nome_coluna].size()-1);
        }
 }
 void DataFrame::InserirLinhaString(boost::python::list& l, std::string nome_coluna){
     for (int i = 0; i < len(l) ; i++){
            coluna_string[nome_coluna].push_back(boost::python::extract<std::string>(l[i]));
+            if (string_trees.count(nome_coluna))
+                string_trees[nome_coluna].insert_node_with_row(boost::python::extract<std::string>(l[i]),coluna_string[nome_coluna].size()-1);
        }
 }
 

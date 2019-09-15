@@ -82,6 +82,9 @@ class DataFrameMc():
             self.shape[1] = self.shape[1] - 1
     def RemoverLinha(self, linhas):
     	self.df.RemoverLinha(linhas)
+    	indices = list(self.indices)
+    	for i in indices:
+    		self.IndexarColuna(i)
 
     def GetLoc(self,linha, nome_coluna):
         linhas = []
@@ -126,20 +129,23 @@ class DataFrameMc():
         if self.colunas[nome_coluna] == 'int':
             self.df.IndexarColunaInt([], nome_coluna)
             self.indices.append(nome_coluna)
+            self.indices = list(sorted(set(self.indices)))
         elif self.colunas[nome_coluna] == 'double':
             self.df.IndexarColunaDouble([], nome_coluna)
             self.indices.append(nome_coluna)
+            self.indices = list(sorted(set(self.indices)))
         elif self.colunas[nome_coluna] == 'string':
             self.df.IndexarColunaString([], nome_coluna)
             self.indices.append(nome_coluna)
+            self.indices = list(sorted(set(self.indices)))
 
     def Query_Valor(self, valor,nome_coluna):
         if self.colunas[nome_coluna] == 'int':
-            return list(set(self.df.GetNodeRowsInt(valor, nome_coluna)))
+            return self.df.GetNodeRowsInt(valor, nome_coluna)
         elif self.colunas[nome_coluna] == 'double':
-            return list(set(self.df.GetNodeRowsDouble(valor, nome_coluna)))
+            return self.df.GetNodeRowsDouble(valor, nome_coluna)
         elif self.colunas[nome_coluna] == 'string':
-            return list(set(self.df.GetNodeRowsString(valor, nome_coluna)))
+            return self.df.GetNodeRowsString(valor, nome_coluna)
 
 
 

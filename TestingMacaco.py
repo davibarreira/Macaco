@@ -38,7 +38,10 @@ row = {'col_1':[100,3],'col_3':['z','z'],'col_4':[700.17,3.14], 'col_5':['19','9
 df.InserirLinha(row)
 
 print(df.GetDados())
-df.RemoverLinha([0])
+
+df.RemoverLinha([0,1,2])
+print(df.indices)
+
 print(df.GetDados())
 
 print(df.Query_Valor([3,100],'col_1'))

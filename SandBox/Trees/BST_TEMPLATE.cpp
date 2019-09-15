@@ -63,6 +63,9 @@ public:
             remove(*p);
     }
 
+    void remove_row(int row){
+        remove_row(pRoot, row);
+    }
     void print() {
         print(pRoot);
         cout << endl;
@@ -107,6 +110,14 @@ private:
 
         while((*p)->pChild[0]){
             p = &((*p)->pChild[0]);
+        }
+    }
+
+    void remove_row(Node<Tc> *p, int row) {
+        if (p) {
+            remove_row(p->pChild[1], row);
+            (p->rows).erase(row);
+            remove_row(p->pChild[0], row);
         }
     }
 
@@ -189,6 +200,7 @@ int main(){
     cout << tree.get_node(5).size()<<endl;
     cout << tree.get_node(1).size()<<endl;
     cout << tree.get_node(80).size()<<endl;
+    tree.remove_row(1);
 
     set<int> rows_query = tree.query(70,"<");
     std::vector<int> out(rows_query.begin(), rows_query.end());

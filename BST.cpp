@@ -66,6 +66,10 @@ public:
             remove(*p);
     }
 
+    void remove_row(int row){
+        remove_row(pRoot, row);
+    }
+
     void print() {
         print(pRoot);
         cout << endl;
@@ -103,6 +107,14 @@ private:
             find_min(succesor);
             p->data = (*succesor)->data;
             remove(*succesor);
+        }
+    }
+    
+    void remove_row(Node<Tc> *p, int row) {
+        if (p) {
+            remove_row(p->pChild[1], row);
+            (p->rows).erase(row);
+            remove_row(p->pChild[0], row);
         }
     }
 

@@ -50,6 +50,9 @@ public:
     boost::python::list GetNodeRowsDouble(boost::python::list & nodes, std::string nome_coluna);
     boost::python::list GetNodeRowsString(boost::python::list & nodes, std::string nome_coluna);
 
+
+	void RemoverLinha(boost::python::list& l);
+
 };
 
 void DataFrame::InserirColunaInt(boost::python::list& l, std::string nome_coluna){
@@ -173,6 +176,23 @@ void DataFrame::InserirLinhaString(boost::python::list& l, std::string nome_colu
        }
 }
 
+void DataFrame::RemoverLinha(boost::python::list& l){
+    for (int i = 0; i < len(l) ; i++){
+            for (auto const& [key, val] : coluna_int)
+            {
+                coluna_int[key].erase(coluna_int[key].begin() + boost::python::extract<int>(l[i]));
+            }
+            for (auto const& [key, val] : coluna_double)
+            {
+                coluna_double[key].erase(coluna_double[key].begin() + boost::python::extract<int>(l[i]));
+            }
+            for (auto const& [key, val] : coluna_string)
+            {
+                coluna_string[key].erase(coluna_string[key].begin() + boost::python::extract<int>(l[i]));
+            }
+       }
+}
+
 void DataFrame::IndexarColunaInt(boost::python::list & l,std::string nome_coluna){
     BST<int> tree;
     for (int i = 0; i < coluna_int[nome_coluna].size(); ++i)
@@ -267,6 +287,7 @@ BOOST_PYTHON_MODULE(DataFrame)
     .def("RemoverColunaInt", & DataFrame::RemoverColunaInt)
     .def("RemoverColunaDouble", & DataFrame::RemoverColunaDouble)
     .def("RemoverColunaString", & DataFrame::RemoverColunaString)
+    .def("RemoverLinha", & DataFrame::RemoverLinha)
     .def("GetLinhaInt", & DataFrame::GetLinhaInt)
     .def("GetLinhaDouble", & DataFrame::GetLinhaDouble)
     .def("GetLinhaString", & DataFrame::GetLinhaString)

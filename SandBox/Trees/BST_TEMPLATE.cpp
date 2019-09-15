@@ -125,7 +125,7 @@ private:
             return ;
 
         if ( value < root->data )
-            query_g(root->pChild[0], value, output, op);
+        query_g(root->pChild[0], value, output, op);
 
         if (op == ">=")
         if ( value <= root->data){
@@ -137,7 +137,7 @@ private:
                 output.insert((root->rows).begin(),(root->rows).end());
             }
 
-            query_g(root->pChild[1], value, output, op);
+        query_g(root->pChild[1], value, output, op);
     }
 
     void query_l(Node<Tc> *root, Tc value, set<int>& output, string op)

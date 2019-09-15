@@ -36,6 +36,9 @@ df.IndexarColuna('col_3')
 df.IndexarColuna('col_4')
 row = {'col_1':[100,3],'col_3':['z','z'],'col_4':[700.17,3.14], 'col_5':['19','90']}
 df.InserirLinha(row)
+
+print(df.GetDados())
+df.RemoverLinha([0])
 print(df.GetDados())
 
 print(df.Query_Valor([3,100],'col_1'))

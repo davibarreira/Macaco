@@ -80,6 +80,8 @@ class DataFrameMc():
             self.df.RemoverColunaString([],nome_coluna)
             self.colunas.pop(nome_coluna)
             self.shape[1] = self.shape[1] - 1
+    def RemoverLinha(self, linhas):
+    	self.df.RemoverLinha(linhas)
 
     def GetLoc(self,linha, nome_coluna):
         linhas = []

@@ -48,6 +48,10 @@ print(df.Query_Valor([3,100],'col_1'))
 print(df.Query_Valor(['z'],'col_3'))
 print(df.Query_Valor([3.14],'col_4'))
 
+print(df.Query_Simples('col_1',"<=",3))
+print(df.Query_Simples('col_4',">",99))
+print(df.Query_Simples('col_3',"==","z"))
+
 
 
 # Funcao para testar plotagem do grafico

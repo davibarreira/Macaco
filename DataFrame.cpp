@@ -53,6 +53,9 @@ public:
 
 	void RemoverLinha(boost::python::list& l);
 
+	boost::python::list QuerySimpleInt(boost::python::list & v, std::string nome_coluna, std::string operador);
+	boost::python::list QuerySimpleDouble(boost::python::list & v, std::string nome_coluna, std::string operador);
+	boost::python::list QuerySimpleString(boost::python::list & v, std::string nome_coluna, std::string operador);
 };
 
 void DataFrame::InserirColunaInt(boost::python::list& l, std::string nome_coluna){
@@ -272,6 +275,120 @@ boost::python::list DataFrame::GetNodeRowsString(boost::python::list & nodes, st
 }
 
 
+boost::python::list DataFrame::QuerySimpleInt(boost::python::list & v, std::string nome_coluna,std::string operador){
+    boost::python::list l;
+    int valor = boost::python::extract<int>(v[0]);
+    int linha = 0;
+    for (auto i: coluna_int[nome_coluna])
+    {
+    	if (operador == "<")
+    	{
+	    	if (i < valor)
+	        l.append(linha);
+    	}
+
+    	if (operador == "<=")
+    	{
+	    	if (i <= valor)
+	        l.append(linha);
+    	}
+
+    	if (operador == ">")
+    	{
+	    	if (i > valor)
+	        l.append(linha);
+    	}
+    	if (operador == ">=")
+    	{
+	    	if (i >= valor)
+	        l.append(linha);
+    	}
+    	if (operador == "==")
+    	{
+	    	if (i == valor)
+	        l.append(linha);
+    	}
+    	linha++;
+    }
+    return l;
+}
+
+boost::python::list DataFrame::QuerySimpleDouble(boost::python::list & v, std::string nome_coluna, std::string operador){
+    boost::python::list l;
+    double valor = boost::python::extract<double>(v[0]);
+    int linha = 0;
+    for (auto i: coluna_double[nome_coluna])
+    {
+    	if (operador == "<")
+    	{
+	    	if (i < valor)
+	        l.append(linha);
+    	}
+
+    	if (operador == "<=")
+    	{
+	    	if (i <= valor)
+	        l.append(linha);
+    	}
+
+    	if (operador == ">")
+    	{
+	    	if (i > valor)
+	        l.append(linha);
+    	}
+    	if (operador == ">=")
+    	{
+	    	if (i >= valor)
+	        l.append(linha);
+    	}
+    	if (operador == "==")
+    	{
+	    	if (i == valor)
+	        l.append(linha);
+    	}
+    	linha++;
+    }
+    return l;
+}
+
+boost::python::list DataFrame::QuerySimpleString(boost::python::list & v, std::string nome_coluna, std::string operador){
+    boost::python::list l;
+    std::string valor = boost::python::extract<std::string>(v[0]);
+    int linha = 0;
+    for (auto i: coluna_string[nome_coluna])
+    {
+    	if (operador == "<")
+    	{
+	    	if (i < valor)
+	        l.append(linha);
+    	}
+
+    	if (operador == "<=")
+    	{
+	    	if (i <= valor)
+	        l.append(linha);
+    	}
+
+    	if (operador == ">")
+    	{
+	    	if (i > valor)
+	        l.append(linha);
+    	}
+    	if (operador == ">=")
+    	{
+	    	if (i >= valor)
+	        l.append(linha);
+    	}
+    	if (operador == "==")
+    	{
+	    	if (i == valor)
+	        l.append(linha);
+    	}
+    	linha++;
+    }
+    return l;
+}
+
 #include <boost/python.hpp>
 using namespace boost::python;
 
@@ -300,6 +417,9 @@ BOOST_PYTHON_MODULE(DataFrame)
     .def("GetNodeRowsInt", & DataFrame::GetNodeRowsInt)
     .def("GetNodeRowsDouble", & DataFrame::GetNodeRowsDouble)
     .def("GetNodeRowsString", & DataFrame::GetNodeRowsString)
+    .def("QuerySimpleInt", & DataFrame::QuerySimpleInt)
+    .def("QuerySimpleDouble", & DataFrame::QuerySimpleDouble)
+    .def("QuerySimpleString", & DataFrame::QuerySimpleString)
     .def_readwrite("coluna_int", & DataFrame::coluna_int)
     ;
 

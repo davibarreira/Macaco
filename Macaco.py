@@ -149,6 +149,15 @@ class DataFrameMc():
         elif self.colunas[nome_coluna] == 'string':
             return self.df.GetNodeRowsString(valor, nome_coluna)
 
+    def Query_Simples(self, nome_coluna, operador, valor):
+        if self.colunas[nome_coluna] == 'int':
+            return self.df.QuerySimpleInt([valor],nome_coluna, operador)
+        elif self.colunas[nome_coluna] == 'double':
+            return self.df.QuerySimpleDouble([valor],nome_coluna, operador)
+        elif self.colunas[nome_coluna] == 'string':
+            return self.df.QuerySimpleString([valor],nome_coluna, operador)
+
+
 
 
 

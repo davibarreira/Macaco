@@ -80,8 +80,10 @@ class DataFrameMc():
             self.df.RemoverColunaString([],nome_coluna)
             self.colunas.pop(nome_coluna)
             self.shape[1] = self.shape[1] - 1
+
     def RemoverLinha(self, linhas):
     	self.df.RemoverLinha(linhas)
+    	self.shape[0] = self.shape[0] - len(linhas)
     	indices = list(self.indices)
     	for i in indices:
     		self.IndexarColuna(i)

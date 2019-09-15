@@ -68,9 +68,10 @@ public:
         cout << endl;
     }
 
-    void query(int val){
+    set<int> query(int val){
         set<int> output;
         query(pRoot, val, output);
+        return output;
     }
 
 
@@ -128,33 +129,14 @@ private:
         // if ( k1 <= root->data && k2 >= root->data )
         //     cout<<root->data<<" ";
 
-        if ( value <= root->data)
+        if ( value <= root->data){
+            output.insert((root->rows).begin(), (root->rows).end());
             cout<<root->data<<" ";
+        }
 
 //        if ( value > root->data )
             query(root->pChild[1], value, output);
     }
-    // set<int> query(Node<Tc> *root, Tc k1, Tc k2)  
-    // {  
-    //     set<int> output;
-    //     if ( !root ){
-    //         output.insert((root->rows).begin(), (root->rows).end());
-    //         return output;  
-    //     }
-
-    //     if ( k1 < root->data )  
-    //         query(root->pChild[0], k1, k2);  
-
-    //     // Condicao 
-    //     // if ( k1 <= root->data && k2 >= root->data )  
-    //     //     cout<<root->data<<" ";  
-
-    //     if ( k1 <= root->data)  
-    //         cout<<root->data<<" ";  
-
-    //     if ( k2 > root->data )  
-    //         query(root->pChild[1], k1, k2);  
-    // }
 };
 
 
@@ -163,21 +145,18 @@ int main(){
     BST<int> tree;
     // tree.printRange(10, 20);
 
-    tree.insert(10);
-    tree.insert(10);
-    tree.insert(1);
-    tree.insert(8);
-    tree.insert(80);
-    tree.insert(88);
-    tree.insert(70);
-    tree.insert(75);
-    tree.insert_with_row(5, 1);
+    tree.insert_with_row(10, 200);
+    tree.insert_with_row(10, 300);
+    tree.insert_with_row(80, 500);
+    tree.insert_with_row(88, 200);
+    tree.insert_with_row(70, 900);
+    tree.insert_with_row(75, 100);
     tree.insert_with_row(5, 1);
     tree.insert_with_row(5, 10);
-    tree.insert_with_row(5, 2);
     tree.insert_with_row(4, 2);
     tree.insert_with_row(2, 2);
     tree.insert_with_row(1, 1);
+    tree.insert_with_row(3, 10);
     tree.remove(10);
     tree.print();
     std::set<int> s = tree.get_node(5);
@@ -186,8 +165,14 @@ int main(){
     cout << tree.get_node(1).size()<<endl;
     cout << tree.get_node(80).size()<<endl;
 
-    set<int> rows_query;
-    tree.query(70);
+    set<int> rows_query = tree.query(70);
+    std::vector<int> out(rows_query.begin(), rows_query.end());
+
+    for (auto i: out)
+    {
+        cout << i << endl;
+    }
+
 
 
     return 0;

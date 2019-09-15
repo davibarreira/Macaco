@@ -68,9 +68,10 @@ public:
         cout << endl;
     }
 
-    void query(int val){
+    set<int> query(int val){
         set<int> output;
         query(pRoot, val, output);
+        return output;
     }
 
 
@@ -127,8 +128,11 @@ private:
         // if ( k1 <= root->data && k2 >= root->data )
         //     cout<<root->data<<" ";
 
-        if ( value <= root->data)
+        if ( value <= root->data){
             cout<<root->data<<" ";
+            output.insert((root->rows).begin(),(root->rows).end());
+        }
+
 
 //        if ( value > root->data )
             query(root->pChild[1], value, output);
@@ -166,8 +170,14 @@ int main(){
     cout << tree.get_node(1).size()<<endl;
 //    cout << tree.get_node(80).size()<<endl;
 
-    set<int> rows_query;
-    tree.query(0);
+    set<int> rows_query = tree.query(0);
+    std::vector<int> out(rows_query.begin(), rows_query.end());
+
+    for (auto i: out)
+    {
+        cout << i << endl;
+    }
+
 
 
     return 0;

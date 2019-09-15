@@ -68,9 +68,14 @@ public:
         cout << endl;
     }
 
-    set<int> query(int val){
+    set<int> query(int val, string operador){
         set<int> output;
-        query(pRoot, val, output);
+        if (operador == ">" | operador == ">=")
+        query_g(pRoot, val, output, operador);
+
+        if (operador == "<" | operador == "<=")
+        query_l(pRoot, val, output, operador);
+
         return output;
     }
 
@@ -115,27 +120,50 @@ private:
         }
     }
 
-    void query(Node<Tc> *root, Tc value, set<int>& output)
+    void query_g(Node<Tc> *root, Tc value, set<int>& output, string op)
     {
-        if ( !root ){
+        if ( !root )
             return ;
-        }
 
         if ( value < root->data )
-            query(root->pChild[0], value, output);
+            query_g(root->pChild[0], value, output, op);
 
-        // Condicao
-        // if ( k1 <= root->data && k2 >= root->data )
-        //     cout<<root->data<<" ";
-
+        if (op == ">=")
         if ( value <= root->data){
             cout<<root->data<<" ";
             output.insert((root->rows).begin(),(root->rows).end());
         }
 
+        if (op == ">")
+            if ( value < root->data){
+                cout<<root->data<<" ";
+                output.insert((root->rows).begin(),(root->rows).end());
+            }
 
-//        if ( value > root->data )
-            query(root->pChild[1], value, output);
+            query_g(root->pChild[1], value, output, op);
+    }
+
+    void query_l(Node<Tc> *root, Tc value, set<int>& output, string op)
+    {
+        if ( !root )
+            return ;
+
+        query_l(root->pChild[0], value, output, op);
+
+        if (op == "<=")
+            if ( value >= root->data){
+                cout<<root->data<<" ";
+                output.insert((root->rows).begin(),(root->rows).end());
+            }
+
+        if (op == "<")
+            if ( value > root->data){
+                cout<<root->data<<" ";
+                output.insert((root->rows).begin(),(root->rows).end());
+            }
+
+        if ( value > root->data )
+        query_l(root->pChild[1], value, output, op);
     }
 };
 
@@ -150,18 +178,14 @@ int main(){
 //    tree.insert(1);
 //    tree.insert(8);
 //    tree.insert(80);
-    tree.insert_with_row(8, 1);
-    tree.insert_with_row(80, 1);
-    tree.insert_with_row(82, 1);
-    tree.insert_with_row(70, 20);
-    tree.insert_with_row(88, 1);
-    tree.insert_with_row(5, 1);
-    tree.insert_with_row(5, 1);
-    tree.insert_with_row(5, 1);
-    tree.insert_with_row(5, 10);
-    tree.insert_with_row(5, 2);
+    tree.insert_with_row(8, 8);
+    tree.insert_with_row(80, 80);
+    tree.insert_with_row(82, 82);
+    tree.insert_with_row(70, 70);
+    tree.insert_with_row(88, 88);
+    tree.insert_with_row(5, 5);
     tree.insert_with_row(1, 1);
-    tree.insert_with_row(-1, 20);
+    tree.insert_with_row(-1, -1);
     tree.remove(10);
     tree.print();
     std::set<int> s = tree.get_node(5);
@@ -170,12 +194,12 @@ int main(){
     cout << tree.get_node(1).size()<<endl;
 //    cout << tree.get_node(80).size()<<endl;
 
-    set<int> rows_query = tree.query(0);
+    set<int> rows_query = tree.query(8, "<=");
     std::vector<int> out(rows_query.begin(), rows_query.end());
 
     for (auto i: out)
     {
-        cout << i << endl;
+        cout << endl<< i << endl;
     }
 
 

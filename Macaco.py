@@ -147,7 +147,7 @@ class DataFrameMc():
 
     # Funções de Visualização dos Dados (gráficos)
 
-    def Scatter(self,nome_coluna1,nome_coluna2):
+    def Plot(self,nome_coluna1,nome_coluna2):
         x = self.GetColuna(nome_coluna1)
         y = self.GetColuna(nome_coluna2)
         plt.plot(x,y,'o')

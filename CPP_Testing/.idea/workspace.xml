@@ -12,8 +12,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="02c18c3e-61ce-4df4-9e85-1a58b9942918" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Macaco.dir/main.cpp.o" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/main.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../BST.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../BST.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Macaco.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Macaco.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../TestingMacaco.py" beforeDir="false" afterPath="$PROJECT_DIR$/../TestingMacaco.py" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/cmake-build-debug/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -31,8 +32,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/main.cpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="198">
-              <caret line="71" column="24" lean-forward="true" selection-start-line="70" selection-end-line="79" selection-end-column="5" />
+            <state relative-caret-position="162">
+              <caret line="155" column="19" selection-start-line="122" selection-end-line="166" selection-end-column="5" />
               <folding>
                 <element signature="e#0#19#0" expanded="true" />
                 <element signature="e#151#163#0" expanded="true" />
@@ -215,12 +216,12 @@
       <option name="presentableId" value="Default" />
       <updated>1568492217138</updated>
       <workItem from="1568492218345" duration="89000" />
-      <workItem from="1568492348619" duration="9213000" />
+      <workItem from="1568492348619" duration="9847000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="9302000" />
+    <option name="totallyTimeSpent" value="9936000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="63" y="34" width="1857" height="1046" extended-state="6" />
@@ -347,8 +348,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/main.cpp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="198">
-          <caret line="71" column="24" lean-forward="true" selection-start-line="70" selection-end-line="79" selection-end-column="5" />
+        <state relative-caret-position="162">
+          <caret line="155" column="19" selection-start-line="122" selection-end-line="166" selection-end-column="5" />
           <folding>
             <element signature="e#0#19#0" expanded="true" />
             <element signature="e#151#163#0" expanded="true" />

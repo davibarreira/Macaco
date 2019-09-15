@@ -42,7 +42,7 @@ print(df.Query_Valor([3.14],'col_4'))
 
 
 # Funcao para testar plotagem do grafico
-fig = df.Scatter('col_1','col_3')
+fig = df.Plot('col_1','col_3')
 plt.show()
 
 

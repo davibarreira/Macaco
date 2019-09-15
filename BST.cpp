@@ -71,6 +71,17 @@ public:
         cout << endl;
     }
 
+    set<int> query(int val, string operador){
+        set<int> output;
+        if (operador == ">" | operador == ">=")
+        query_g(pRoot, val, output, operador);
+
+        if (operador == "<" | operador == "<=")
+        query_l(pRoot, val, output, operador);
+
+        return output;
+    }
+
 private:
     bool find(Tc x, Node<Tc> **&p) {
         p = &pRoot;
@@ -109,5 +120,47 @@ private:
             cout<< p->data <<endl;
             print(p->pChild[0], indent+6);
         }
+    }
+
+    void query_g(Node<Tc> *root, Tc value, set<int>& output, string op)
+    {
+        if ( !root )
+            return ;
+
+        if ( value < root->data )
+            query_g(root->pChild[0], value, output, op);
+
+        if (op == ">=")
+        if ( value <= root->data){
+            output.insert((root->rows).begin(),(root->rows).end());
+        }
+
+        if (op == ">")
+            if ( value < root->data){
+                output.insert((root->rows).begin(),(root->rows).end());
+            }
+
+            query_g(root->pChild[1], value, output, op);
+    }
+
+    void query_l(Node<Tc> *root, Tc value, set<int>& output, string op)
+    {
+        if ( !root )
+            return ;
+
+        query_l(root->pChild[0], value, output, op);
+
+        if (op == "<=")
+            if ( value >= root->data){
+                output.insert((root->rows).begin(),(root->rows).end());
+            }
+
+        if (op == "<")
+            if ( value > root->data){
+                output.insert((root->rows).begin(),(root->rows).end());
+            }
+
+        if ( value > root->data )
+        query_l(root->pChild[1], value, output, op);
     }
 };

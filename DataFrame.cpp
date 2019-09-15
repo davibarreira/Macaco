@@ -137,12 +137,18 @@ boost::python::list DataFrame::GetLinhaString(boost::python::list & linhas, std:
 
 void DataFrame::RemoverColunaInt(boost::python::list& l, std::string nome_coluna){
     coluna_int.erase(nome_coluna);
+    if (int_trees.count(nome_coluna))
+        int_trees.erase(nome_coluna);
 }
 void DataFrame::RemoverColunaDouble(boost::python::list& l, std::string nome_coluna){
     coluna_double.erase(nome_coluna);
+    if (double_trees.count(nome_coluna))
+        double_trees.erase(nome_coluna);
 }
 void DataFrame::RemoverColunaString(boost::python::list& l, std::string nome_coluna){
     coluna_string.erase(nome_coluna);
+    if (string_trees.count(nome_coluna))
+        string_trees.erase(nome_coluna);
 }
 
 void DataFrame::InserirLinhaInt(boost::python::list& l, std::string nome_coluna){

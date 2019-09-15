@@ -68,6 +68,12 @@ public:
         cout << endl;
     }
 
+    void query(int val){
+        set<int> output;
+        query(pRoot, val, output);
+    }
+
+
 private:
     bool find(Tc x, Node<Tc> **&p) {
         p = &pRoot;
@@ -107,22 +113,70 @@ private:
             print(p->pChild[0], indent+6);
         }
     }
+
+
+    void query(Node<Tc> *root, Tc value, set<int>& output)
+    {
+        if ( !root ){
+            return ;
+        }
+
+        if ( value < root->data )
+            query(root->pChild[0], value, output);
+
+        // Condicao
+        // if ( k1 <= root->data && k2 >= root->data )
+        //     cout<<root->data<<" ";
+
+        if ( value <= root->data)
+            cout<<root->data<<" ";
+
+//        if ( value > root->data )
+            query(root->pChild[1], value, output);
+    }
+    // set<int> query(Node<Tc> *root, Tc k1, Tc k2)  
+    // {  
+    //     set<int> output;
+    //     if ( !root ){
+    //         output.insert((root->rows).begin(), (root->rows).end());
+    //         return output;  
+    //     }
+
+    //     if ( k1 < root->data )  
+    //         query(root->pChild[0], k1, k2);  
+
+    //     // Condicao 
+    //     // if ( k1 <= root->data && k2 >= root->data )  
+    //     //     cout<<root->data<<" ";  
+
+    //     if ( k1 <= root->data)  
+    //         cout<<root->data<<" ";  
+
+    //     if ( k2 > root->data )  
+    //         query(root->pChild[1], k1, k2);  
+    // }
 };
 
 
 int main(){
 
     BST<int> tree;
+    // tree.printRange(10, 20);
 
     tree.insert(10);
     tree.insert(10);
     tree.insert(1);
     tree.insert(8);
     tree.insert(80);
+    tree.insert(88);
+    tree.insert(70);
+    tree.insert(75);
     tree.insert_with_row(5, 1);
     tree.insert_with_row(5, 1);
     tree.insert_with_row(5, 10);
     tree.insert_with_row(5, 2);
+    tree.insert_with_row(4, 2);
+    tree.insert_with_row(2, 2);
     tree.insert_with_row(1, 1);
     tree.remove(10);
     tree.print();
@@ -132,10 +186,9 @@ int main(){
     cout << tree.get_node(1).size()<<endl;
     cout << tree.get_node(80).size()<<endl;
 
-    for (auto i: output)
-    {
-        cout << i << endl;
-    }
+    set<int> rows_query;
+    tree.query(70);
+
 
     return 0;
 }

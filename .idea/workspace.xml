@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="CMakeRunConfigurationManager" shouldGenerate="true" shouldDeleteObsolete="true">
-    <generated>
-      <config projectName="Macaco" targetName="Macaco" />
-    </generated>
+    <generated />
   </component>
   <component name="CMakeSettings">
     <configurations>
@@ -13,17 +11,12 @@
   <component name="ChangeListManager">
     <list default="true" id="d51b729f-7f2e-4660-9b3b-b34024140d73" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PythonBoost/DataFrame.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/PythonBoost/DataFrame.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PythonBoost/Macaco.py" beforeDir="false" afterPath="$PROJECT_DIR$/PythonBoost/Macaco.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PythonBoost/PENDENCIAS_LIMITES.txt" beforeDir="false" afterPath="$PROJECT_DIR$/PythonBoost/PENDENCIAS_LIMITES.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PythonBoost/test.py" beforeDir="false" afterPath="$PROJECT_DIR$/PythonBoost/test.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SandBox/Trees/bst-0.0.cpp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/SandBox/pythonboost/chupa.zip" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/SandBox/pythonboost/hello.o" beforeDir="false" afterPath="$PROJECT_DIR$/SandBox/pythonboost/hello.o" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SandBox/pythonboost/hello.so" beforeDir="false" afterPath="$PROJECT_DIR$/SandBox/pythonboost/hello.so" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Macaco.dir/main.cpp.o" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Macaco.dir/main.cpp.o" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Macaco" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/Macaco" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/main.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Macaco.py" beforeDir="false" afterPath="$PROJECT_DIR$/Macaco.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SandBox/Trees/BST_TEMPLATE" beforeDir="false" afterPath="$PROJECT_DIR$/SandBox/Trees/BST_TEMPLATE" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SandBox/Trees/BST_TEMPLATE.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/SandBox/Trees/BST_TEMPLATE.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test2.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testMacacoNotebook.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/testMacacoNotebook.ipynb" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/cmake-build-debug/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -35,25 +28,11 @@
   <component name="ClangdSettings">
     <option name="formatViaClangd" value="false" />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="CMakeBuildProfile:Debug" />
   <component name="FavoritesManager">
     <favorites_list name="Macaco" />
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="375">
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/main.cpp">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="313">
-              <caret line="105" column="34" selection-start-line="105" selection-start-column="34" selection-end-line="105" selection-end-column="34" />
-              <folding>
-                <element signature="e#1#20#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="375" />
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
@@ -113,6 +92,7 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="com.intellij.ide.scratch.LRUPopupBuilder$1/New Scratch File" value="ObjectiveC" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/CPP_Testing" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -135,13 +115,6 @@
       </list>
     </option>
   </component>
-  <component name="RunManager">
-    <configuration name="Macaco" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Macaco" TARGET_NAME="Macaco" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="Macaco" RUN_TARGET_NAME="Macaco">
-      <method v="2">
-        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
-      </method>
-    </configuration>
-  </component>
   <component name="SvnConfiguration">
     <configuration />
   </component>
@@ -159,15 +132,15 @@
       <workItem from="1566846792737" duration="17163000" />
       <workItem from="1566942509880" duration="17176000" />
       <workItem from="1567627744532" duration="16728000" />
+      <workItem from="1568489928347" duration="863000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="75366000" />
+    <option name="totallyTimeSpent" value="76229000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="63" y="34" width="1857" height="1046" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" sideWeight="0.4994401" weight="0.26096612" />
       <window_info id="Structure" order="1" sideWeight="0.5005599" side_tool="true" weight="0.2570794" />
@@ -183,7 +156,7 @@
       <window_info anchor="bottom" id="Terminal" order="8" weight="0.32922733" />
       <window_info anchor="bottom" id="Event Log" order="9" side_tool="true" weight="0.32922733" />
       <window_info anchor="bottom" id="Version Control" order="10" weight="0.32922733" />
-      <window_info anchor="bottom" id="CMake" order="11" weight="0.32922733" />
+      <window_info anchor="bottom" id="CMake" order="11" visible="true" weight="0.32922733" />
       <window_info anchor="bottom" id="Messages" order="12" weight="0.32922733" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -279,15 +252,7 @@
     <entry file="file://$PROJECT_DIR$/CMakeLists.txt">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/hw2/bst-0.0.cpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <folding>
-            <element signature="e#0#19#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/hw2/bst-0.0.cpp" />
     <entry file="file:///usr/include/c++/7/variant">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="167">
@@ -318,7 +283,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/main.cpp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="313">
+        <state relative-caret-position="670">
           <caret line="105" column="34" selection-start-line="105" selection-start-column="34" selection-end-line="105" selection-end-column="34" />
           <folding>
             <element signature="e#1#20#0" expanded="true" />

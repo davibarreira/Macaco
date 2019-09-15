@@ -1,5 +1,5 @@
 import Macaco as mc
-#from matplotlib import pyplot as plt
+from matplotlib import pyplot as plt
 
 data = {'col_1': [3, 3, 3, 0], 'col_2': ['a', 'b', 'c', 'd']}
 df = mc.DataFrameMc(data)
@@ -41,8 +41,9 @@ print(df.Query_Valor([3.14],'col_4'))
 
 
 
-#fig = df.Scatter('col_1','col_3')
-#plt.show()
+# Funcao para testar plotagem do grafico
+fig = df.Scatter('col_1','col_3')
+plt.show()
 
 
 # for nome_coluna in df.colunas:

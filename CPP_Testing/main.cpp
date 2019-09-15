@@ -1,116 +1,174 @@
-
 #include <iostream>
-#include <string>
+#include <iomanip>
 #include <vector>
-#include <map>
-#include <any>
-#include <variant>
-#include <tuple>
+#include <initializer_list>
+
+#include <set>
+#include <string>
 
 
+using namespace std;
 
-struct coluna{
-    char tipo;
-    void * pcoluna;
+template<typename T>
+struct Node {
+    T data;
+    set<int> rows;
 
+    Node *pChild[2];
+    Node(T x):data(x) {
+        pChild[0] = pChild[1] = nullptr;
+    }
 };
 
-class DataFrame{
-private:
+template<typename Tc>
+class BST {
 
+
+protected:
+    Node<Tc> *pRoot;
 
 public:
 
-    std::map<std::string, std::vector<int>> coluna_int;
-    std::map<std::string,std::vector<double>> coluna_double;
-    std::map<std::string,std::vector<std::string>> coluna_string;
+
+    BST():pRoot(nullptr) {}
+
+    bool find(Tc x) {
+        Node<Tc> **p;
+        return find(x, p);
+    }
+
+    set<int> get_node(Tc x) {
+        Node<Tc> **p;
+        find(x, p);
+        return (*p)->rows;
+    }
+
+    void insert_with_row(Tc x, int row) {
+        Node<Tc> **p;
+        if (!find(x, p)) {
+            *p = new Node<Tc>(x);
+        }
+        (*p)->rows.insert(row);
+    }
+
+    void insert(Tc x) {
+        Node<Tc> **p;
+        if (!find(x, p)) {
+            *p = new Node<Tc>(x);
+        }
+    }
+    void remove(Tc x) {
+        Node<Tc> **p;
+        if(find(x, p))
+            remove(*p);
+    }
+
+    void print() {
+        print(pRoot);
+        cout << endl;
+    }
+
+    void query(int val){
+        set<int> output;
+        query(pRoot, val, output);
+    }
 
 
+private:
+    bool find(Tc x, Node<Tc> **&p) {
+        p = &pRoot;
+        while(*p) {
+            if ((*p)->data==x) return true;
 
-    void InserirColunaInt(std::string coluna, std::vector<int> valores);
-    void InserirColunaDouble(std::string coluna, std::vector<double> valores);
-    void InserirColunaString(std::string coluna, std::vector<std::string> valores);
+            p = &((*p)->pChild[(*p)->data < x]);
+        }
 
-    void RemoverColunaInt(std::string nome_coluna);
+        return false;
+    }
 
+    void remove(Node<Tc> *&p) {
+        if (!p->pChild[0] || !p->pChild[1])
+            p = p->pChild[p->pChild[1]!=nullptr];
+
+        else {
+            Node<Tc> **succesor = &(p->pChild[1]);
+            find_min(succesor);
+            p->data = (*succesor)->data;
+            remove(*succesor);
+        }
+    }
+
+    void find_min(Node<Tc> **&p) {
+
+        while((*p)->pChild[0]){
+            p = &((*p)->pChild[0]);
+        }
+    }
+
+    void print(Node<Tc> *p, int indent=0) {
+        if (p) {
+            print(p->pChild[1], indent+6);
+            cout << setw(indent) << ' ';
+            cout<< p->data <<endl;
+            print(p->pChild[0], indent+6);
+        }
+    }
+
+    void query(Node<Tc> *root, Tc value, set<int>& output)
+    {
+        if ( !root ){
+            return ;
+        }
+
+        if ( value < root->data )
+            query(root->pChild[0], value, output);
+
+        // Condicao
+        // if ( k1 <= root->data && k2 >= root->data )
+        //     cout<<root->data<<" ";
+
+        if ( value <= root->data)
+            cout<<root->data<<" ";
+
+//        if ( value > root->data )
+            query(root->pChild[1], value, output);
+    }
 };
 
-void DataFrame::InserirColunaInt(std::string coluna, std::vector<int> valores){
-    coluna_int[coluna] = valores;
-}
 
-void DataFrame::InserirColunaDouble(std::string coluna, std::vector<double> valores){
-    coluna_double[coluna] = valores;
-}
+int main(){
 
-void DataFrame::InserirColunaString(std::string coluna, std::vector<std::string> valores){
-    coluna_string[coluna] = valores;
-}
+    BST<int> tree;
+    // tree.printRange(10, 20);
 
-void DataFrame::RemoverColunaInt(std::string nome_coluna){
-    coluna_int.erase(nome_coluna);
-}
-//
-//void DataFrame::AddRow(std::vector<std::variant<int,double, std::string>> row){
-//    int i = 0;
-//    for( auto const& [key, col] : df ) {
-//        switch (col.tipo) {
-//            case 's':
-//                (*static_cast<std::vector<std::string> *>(col.pcoluna)).push_back(std::get<std::string>(row[i]));
-//                break;
-//            case 'i':
-//                (*static_cast<std::vector<int> *>(col.pcoluna)).push_back(std::get<int>(row[i]));
-//                break;
-//            case 'd':
-//                (*static_cast<std::vector<double> *>(col.pcoluna)).push_back(std::get<double>(row[i]));
-//                break;
-//        }
-//        i++;
-//    }
-//
-//}
-//
-//void DataFrame::PrintColuna(std::string nome_coluna){
-//    coluna col = df[nome_coluna];
-//    switch (col.tipo)
-//    {
-//        case 's':
-//            for(auto i: (*static_cast<std::vector<std::string>*>(col.pcoluna)))
-//                std::cout << i << std::endl;
-//            break;
-//        case 'i':
-//            for(auto i: (*static_cast<std::vector<int>*>(col.pcoluna)))
-//                std::cout << i << std::endl;
-//            break;
-//        case 'd':
-//            for(auto i: (*static_cast<std::vector<double>*>(col.pcoluna)))
-//                std::cout << i << std::endl;
-//            break;
-//    }
-//}
+//    tree.insert(10);
+//    tree.insert(10);
+//    tree.insert(1);
+//    tree.insert(8);
+//    tree.insert(80);
+    tree.insert_with_row(8, 1);
+    tree.insert_with_row(80, 1);
+    tree.insert_with_row(82, 1);
+    tree.insert_with_row(70, 20);
+    tree.insert_with_row(88, 1);
+    tree.insert_with_row(5, 1);
+    tree.insert_with_row(5, 1);
+    tree.insert_with_row(5, 1);
+    tree.insert_with_row(5, 10);
+    tree.insert_with_row(5, 2);
+    tree.insert_with_row(1, 1);
+    tree.insert_with_row(-1, 20);
+    tree.remove(10);
+    tree.print();
+    std::set<int> s = tree.get_node(5);
+    std::vector<int> output(s.begin(), s.end());
+    cout << tree.get_node(5).size()<<endl;
+    cout << tree.get_node(1).size()<<endl;
+//    cout << tree.get_node(80).size()<<endl;
 
+    set<int> rows_query;
+    tree.query(0);
 
-int main() {
-
-
-
-    std::vector<int> idade {11,10,NULL};
-    std::vector<int> qtd {5,7,8};
-    std::vector<double> preco {1.0,5.2,2.2};
-    std::vector<std::string> nomes {"Davi","Flavio",""};
-
-
-    DataFrame davi;
-
-    davi.InserirColunaInt("idade",idade);
-    davi.InserirColunaInt("outro",idade);
-    davi.InserirColunaString("nomes",nomes);
-
-    std::cout << davi.coluna_int["idade"][0];
-
-    davi.RemoverColunaInt("idade");
-
-    std::cout << davi.coluna_int["idade"][0];
 
     return 0;
 }

@@ -6,19 +6,17 @@
 
 #IncludeRegexTransform: 
 
-/home/davi/Dropbox/FGV/EMAp/EAP_Completo/Macaco/main.cpp
+/home/davi/Dropbox/FGV/EMAp/EAP_Completo/Macaco/CPP_Testing/main.cpp
 iostream
 -
-string
+iomanip
 -
 vector
 -
-map
+initializer_list
 -
-any
+set
 -
-variant
--
-tuple
+string
 -
 

@@ -3,7 +3,7 @@ from matplotlib import pyplot as plt
 from tabulate import tabulate
 
 class DataFrameMc():
-    """docstring for DataFrameMc"""
+    """Classe DataFrame. Pode ser inicializada recebendo um dicionario como {'coluna1':[1,10],'coluna2':['valor1','valor2']}"""
     def __init__(self,dados=None):
         self.df      = DataFrame() # DataFrame do .cpp
         self.colunas = {}    # Dicionario de colunas com seus respectivos tipos
@@ -17,8 +17,10 @@ class DataFrameMc():
 
 
     def InserirColuna(self,valores,nome_coluna):
-        # Infere o tipo do dado. Caso encontre multiplos,
-        # transforma em string
+        """ 
+        Infere o tipo do dado. Caso encontre multiplos,
+        transforma em string. Valores devem ser passados dentro de uma lista.
+        """
 
         if all(isinstance(x, int) for x in valores):
             if self.shape == [0,0]:
@@ -62,6 +64,9 @@ class DataFrameMc():
                 self.shape[1] += 1
 
     def GetColuna(self,nome_coluna):
+        """ 
+        Recebe uma coluna e retorna uma lista contendo os valores daquela coluna.
+        """
         if self.colunas[nome_coluna] == 'int':
             return self.df.GetColunaInt(nome_coluna)
         elif self.colunas[nome_coluna] == 'double':
@@ -70,6 +75,9 @@ class DataFrameMc():
             return self.df.GetColunaString(nome_coluna)
 
     def RemoverColuna(self,nome_coluna):
+        """ 
+        Remove coluna do DataFrame.
+        """
         if self.colunas[nome_coluna] == 'int':
             self.df.RemoverColunaInt([],nome_coluna)
             self.colunas.pop(nome_coluna)
@@ -97,6 +105,9 @@ class DataFrameMc():
     		self.IndexarColuna(i)
 
     def GetLoc(self,linha, nome_coluna):
+        """
+        Recebe lista de linhas e UMA coluna e retorna os respectivos dados.
+        """
         linhas = []
         if type(linha) == int:
             linhas.append(linha)
@@ -114,6 +125,9 @@ class DataFrameMc():
             return self.df.GetLinhaString(linhas, nome_coluna)
 
     def GetLinha(self, linha):
+        """
+        Recebe lista de linhas e retorna dados.
+        """
         resultado = {k: [] for k in self.colunas}
         if len(linha) > 0:
 	        for nome_coluna in self.colunas:
@@ -122,10 +136,16 @@ class DataFrameMc():
         return resultado
 
     def GetDados(self):
+        """
+        Retorna todo os dataframe em formato de dicionario.
+        """
         return self.GetLinha(range(0,self.shape[0]))
 
     def Slice(self, linhas,nome_colunas):
-
+        """
+        Recebe lista de linhas e lista de colunas e retorna os dados respectivos
+        em formato de dicionario.
+        """
         if len(linhas) == 0:
             linhas = list(range(0,self.shape[0]))
         if len(nome_colunas) == 1:
@@ -139,6 +159,7 @@ class DataFrameMc():
 
 
     def Show(self, dados):
+        # Recebe dicionario e printa em formato tabular
     	print(tabulate(dados,tablefmt='simple',headers='keys'))
 
     def InserirLinha(self,valores):
@@ -155,6 +176,9 @@ class DataFrameMc():
         self.shape[0] += num_linhas
 
     def IndexarColuna(self, nome_coluna):
+        """
+        Recebe nome de coluna e indexa.
+        """
         if self.colunas[nome_coluna] == 'int':
             self.df.IndexarColunaInt([], nome_coluna)
             self.indices.append(nome_coluna)
@@ -169,6 +193,9 @@ class DataFrameMc():
             self.indices = list(sorted(set(self.indices)))
 
     def RemoverIndice(self, nome_coluna):
+        """
+        Remove indice.
+        """
         if self.colunas[nome_coluna] == 'int':
             self.df.RemoverIndiceInt([], nome_coluna)
             self.indices.remove(nome_coluna)
@@ -180,6 +207,10 @@ class DataFrameMc():
             self.indices.remove(nome_coluna)
 
     def Query_Tree(self, nome_coluna, operador,valor):
+        """
+        Usuario deve usar funcao Query. Essa eh um funcao auxiliar
+        para fazer query na arvore binaria.
+        """
         if self.colunas[nome_coluna] == 'int':
             return self.df.QueryTreeInt([valor],nome_coluna, operador)
         elif self.colunas[nome_coluna] == 'double':
@@ -189,6 +220,10 @@ class DataFrameMc():
 
 
     def Query_Simples(self, nome_coluna, operador, valor):
+        """
+        Usuario deve usar funcao Query. Essa eh um funcao auxiliar
+        para fazer query sem arvore.
+        """
         if self.colunas[nome_coluna] == 'int':
             return self.df.QuerySimpleInt([valor],nome_coluna, operador)
         elif self.colunas[nome_coluna] == 'double':
@@ -197,12 +232,17 @@ class DataFrameMc():
             return self.df.QuerySimpleString([valor],nome_coluna, operador)
 
     def Query(self, nome_coluna, operador, valor):
+        # Funcao para fazer query no dataframe. Operadores sao '==','<','<=','>','>='
     	if nome_coluna in self.indices:
     		return self.Query_Tree(nome_coluna,operador,valor)
     	else:
     		return self.Query_Simples(nome_coluna, operador, valor)
 
     def QueryRect(self, queryrect, nome_coordenada1, nome_coordenada2):
+        """
+        Exige que colunas de coordenadas sejam de double.
+        queryrect = [xmin,ymin,xman,yman]
+        """
         if self.colunas[nome_coordenada1] != 'double' or self.colunas[nome_coordenada2] != 'double':
             raise Exception('Colunas com coordenadas devem ser de doubles')
         if nome_coordenada1 in self.indices and nome_coordenada2 in self.indices:

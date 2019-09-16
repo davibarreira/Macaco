@@ -101,87 +101,89 @@ contém os seguintes atributos:
 Abaixo uma breve descrição das funções. Para melhor entender como utilizá-las, recomendamos olhar o arquivo Macaco_Notebook_Showcase.ipynb:
 
 
-```sh
+```py
     def InserirColuna(self,valores,nome_coluna):
-        """ 
-        Infere o tipo do dado. Caso encontre multiplos,
-        transforma em string. Valores devem ser passados dentro de uma lista.
-        """
-```
+    """ 
+    Infere o tipo do dado. Caso encontre multiplos,
+    transforma em string. Valores devem ser passados dentro de uma lista.
+    """
 
-```sh
     def GetColuna(self,nome_coluna):
-        """ 
-        Recebe uma coluna e retorna uma lista contendo os valores daquela coluna.
-        """
-```
+    """ 
+    Recebe uma coluna e retorna uma lista contendo os valores daquela coluna.
+    """
 
-```sh
     def RemoverColuna(self,nome_coluna):
-        """ 
-        Remove coluna do DataFrame.
-        """
-```
+    """ 
+    Remove coluna do DataFrame.
+    """
 
 
-```sh
     def RemoverLinha(self, linhas):
+    """
+    Recebe uma lista de linhas e às remove do dataframe.
+    """
 
-```
-
-```sh
     def GetLoc(self,linha, nome_coluna):
-        """
-        Recebe lista de linhas e UMA coluna e retorna os respectivos dados.
-        """
-```
+    """
+    Recebe lista de linhas e UMA coluna e retorna os respectivos dados.
+    """
 
-```sh
     def GetLinha(self, linha):
-        """
-        Recebe lista de linhas e retorna dados.
-        """
+    """
+    Recebe lista de linhas e retorna dados.
+    """
 
     def GetDados(self):
-        """
-        Retorna todo os dataframe em formato de dicionario.
-        """
+    """
+    Retorna todo os dataframe em formato de dicionario.
+    """
 
     def Slice(self, linhas,nome_colunas):
-        """
-        Recebe lista de linhas e lista de colunas e retorna os dados respectivos
-        em formato de dicionario.
-        """
+    """
+    Recebe lista de linhas e lista de colunas e retorna os dados respectivos
+    em formato de dicionario.
+    """
 
     def Show(self, dados):
-        # Recebe dicionario e printa em formato tabular
+	"""
+    Recebe dicionario e printa em formato tabular
+	"""
 
     def InserirLinha(self,valores):
+    """
+    Insere linha no final do dataframe. Note que *valores* deve ter a forma de um
+    dicionário do tipo {'coluna1': [valor], 'coluna2':[valor]}
+    """
 
     def IndexarColuna(self, nome_coluna):
-        """
-        Recebe nome de coluna e indexa.
-        """
+    """
+    Recebe nome de coluna e indexa, criando uma estrutura de árvore binária atrelada.
+    """
 
     def RemoverIndice(self, nome_coluna):
-        """
-        Remove indice.
-        """
+    """
+    Remove indexação da coluna. O código em C++ remove a árvore atrelada àquela coluna.
+    """
 
     def Query_Tree(self, nome_coluna, operador,valor):
-        """
-        Usuario deve usar funcao Query. Essa eh um funcao auxiliar
-        para fazer query na arvore binaria.
-        """
+    """
+    Usuario deve usar funcao Query. Essa eh um funcao auxiliar
+    para fazer query na arvore binaria.
+    """
 
     def Query_Simples(self, nome_coluna, operador, valor):
-        """
-        Usuario deve usar funcao Query. Essa eh um funcao auxiliar
-        para fazer query sem arvore.
-        """
+    """
+    Usuario deve usar funcao Query. Essa eh um funcao auxiliar
+    para fazer query sem arvore.
+    """
 
     def Query(self, nome_coluna, operador, valor):
-        # Funcao para fazer query no dataframe. Operadores sao '==','<','<=','>','>='
+    """
+    Funcao para fazer query no dataframe. Operadores sao '==','<','<=','>','>='.
+    Ela retorna as linhas contendo aqule informação, assim deve ser chamada em conjunto com
+    a função self.GetLinhas() para retornar os valres.
+    """
 
     def QueryRect(self, queryrect, nome_coordenada1, nome_coordenada2):
     """
@@ -190,11 +192,25 @@ Abaixo uma breve descrição das funções. Para melhor entender como utilizá-l
     """
 
     def Plot(self,nome_coluna1,nome_coluna2, *args,**kwargs):
+    """
+    Realiza plotagens do tipo scatter e line, dependendo dos argumentos
+    fornecidos pelo usuário.
+    """
 
     def Hist(self,nome_coluna1, *args,**kwargs):
+    """
+    Cria histograma com dados da coluna escolhida.
+    """
 
     def Hist2D(self,nome_coluna1, nome_coluna2,*args,**kwargs):
+    """
+    Cria histograma 2D com colunas escolhidas.
+    """
 
     def BarPlot(self, coluna_altura, coluna_posicao, tipo='soma',*args, **kwargs):
-
+    """
+    Faz uma plotagem de gráficos de barra. O usuário pode escolher três tipos, sendo eles:
+    'soma', 'contador' e 'media'. Assim, a altura das barras será ou a soma, ou media ou quantidade
+    de vezes que o valor da posicao apaerceu.
+    """
 ```

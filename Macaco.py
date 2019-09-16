@@ -1,5 +1,6 @@
 from DataFrame import *
 from matplotlib import pyplot as plt
+from tabulate import tabulate
 
 class DataFrameMc():
     """docstring for DataFrameMc"""
@@ -114,6 +115,9 @@ class DataFrameMc():
 
     def GetDados(self):
         return self.GetLinha(range(0,self.shape[0]))
+
+    def Show(self, dados):
+    	print(tabulate(dados,tablefmt='simple',headers='keys'))
 
     def InserirLinha(self,valores):
         num_linhas = [len(valores[i]) for i in valores][0]

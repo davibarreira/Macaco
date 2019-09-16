@@ -96,3 +96,105 @@ contém os seguintes atributos:
 -    `self.colunas` : É um dicionário de colunas com seus respectivos tipos (ex: {'coluna':'double','coluna2':'int'})
 -    `self.shape`   : Contém a quantidade de linhas x colunas
 -    `self.indices` : Lista de colunas que estão indexadas, ou seja, que foi criada uma ávore binária para elas.
+
+
+Abaixo uma breve descrição das funções. Para melhor entender como utilizá-las, recomendamos olhar o arquivo Macaco_Notebook_Showcase.ipynb:
+
+
+```sh
+    def InserirColuna(self,valores,nome_coluna):
+        """ 
+        Infere o tipo do dado. Caso encontre multiplos,
+        transforma em string. Valores devem ser passados dentro de uma lista.
+        """
+```
+
+```sh
+    def GetColuna(self,nome_coluna):
+        """ 
+        Recebe uma coluna e retorna uma lista contendo os valores daquela coluna.
+        """
+```
+
+```sh
+    def RemoverColuna(self,nome_coluna):
+        """ 
+        Remove coluna do DataFrame.
+        """
+```
+
+
+```sh
+    def RemoverLinha(self, linhas):
+
+```
+
+```sh
+    def GetLoc(self,linha, nome_coluna):
+        """
+        Recebe lista de linhas e UMA coluna e retorna os respectivos dados.
+        """
+```
+
+```sh
+    def GetLinha(self, linha):
+        """
+        Recebe lista de linhas e retorna dados.
+        """
+
+    def GetDados(self):
+        """
+        Retorna todo os dataframe em formato de dicionario.
+        """
+
+    def Slice(self, linhas,nome_colunas):
+        """
+        Recebe lista de linhas e lista de colunas e retorna os dados respectivos
+        em formato de dicionario.
+        """
+
+    def Show(self, dados):
+        # Recebe dicionario e printa em formato tabular
+
+    def InserirLinha(self,valores):
+
+    def IndexarColuna(self, nome_coluna):
+        """
+        Recebe nome de coluna e indexa.
+        """
+
+    def RemoverIndice(self, nome_coluna):
+        """
+        Remove indice.
+        """
+
+    def Query_Tree(self, nome_coluna, operador,valor):
+        """
+        Usuario deve usar funcao Query. Essa eh um funcao auxiliar
+        para fazer query na arvore binaria.
+        """
+
+    def Query_Simples(self, nome_coluna, operador, valor):
+        """
+        Usuario deve usar funcao Query. Essa eh um funcao auxiliar
+        para fazer query sem arvore.
+        """
+
+    def Query(self, nome_coluna, operador, valor):
+        # Funcao para fazer query no dataframe. Operadores sao '==','<','<=','>','>='
+
+    def QueryRect(self, queryrect, nome_coordenada1, nome_coordenada2):
+    """
+    Exige que colunas de coordenadas sejam de double.
+    queryrect = [xmin,ymin,xman,yman]
+    """
+
+    def Plot(self,nome_coluna1,nome_coluna2, *args,**kwargs):
+
+    def Hist(self,nome_coluna1, *args,**kwargs):
+
+    def Hist2D(self,nome_coluna1, nome_coluna2,*args,**kwargs):
+
+    def BarPlot(self, coluna_altura, coluna_posicao, tipo='soma',*args, **kwargs):
+
+```

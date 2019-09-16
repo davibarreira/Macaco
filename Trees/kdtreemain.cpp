@@ -64,10 +64,10 @@ int main(int argc, char ** argv)
         std::cerr<< "Must include a number!!\n";
         return 0;
     }
-    n = std::atoi( argv[1] );
+    // n = std::atoi( argv[1] );
     n = 2;
 
-	//make a list of vectors out of the testpoints array
+	// //make a list of vectors out of the testpoints array
 	std::list<vecType> point_list;
 	for(auto i = 0; i < _numpts; i++ )
 	{
@@ -84,6 +84,8 @@ int main(int argc, char ** argv)
 
 	std::cout<<"\n\n";
 	head = nullptr;
+
+	return 0;
 	//print( head->data );
 	/*Node head(3, point_list.front());
 	std::unique_ptr<Node> a = std::unique_ptr<Node>( new Node(3) );

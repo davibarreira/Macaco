@@ -84,7 +84,7 @@ public:
         query_l(pRoot, val, output, operador);
 
         if (operador == "==")
-        output = get_node_rows(val);
+        query_eq(pRoot, val, output, operador);
 
         return output;
     }
@@ -135,6 +135,20 @@ private:
             cout<< p->data <<endl;
             print(p->pChild[0], indent+6);
         }
+    }
+
+    void query_eq(Node<Tc> *root, Tc value, set<int>& output, string op)
+    {
+        if ( !root )
+            return ;
+
+        query_eq(root->pChild[0], value, output, op);
+
+        if ( value == root->data){
+            output.insert((root->rows).begin(),(root->rows).end());
+        }
+
+        query_eq(root->pChild[1], value, output, op);
     }
 
     void query_g(Node<Tc> *root, Tc value, set<int>& output, string op)

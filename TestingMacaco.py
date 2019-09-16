@@ -1,5 +1,8 @@
 import Macaco as mc
 from matplotlib import pyplot as plt
+import pandas as pd
+import seaborn as sns
+import numpy as np
 
 data = {'col_1': [3, 3, 3, 0], 'col_2': ['a', 'b', 'c', 'd']}
 df = mc.DataFrameMc(data)
@@ -61,11 +64,53 @@ print(df.indices)
 
 
 
+### Testing with Iris
+iris = sns.load_dataset('iris')
+data = iris.to_dict('list')
+df = mc.DataFrameMc(data)
+df.Show(df.GetDados())
+
+species = pd.unique(iris['species'])
+for i in species:
+    assert df.GetLinha(df.Query('species','==',i)) == iris[iris['species']==i].to_dict('list')
+
+colunas = iris.columns[0:-1]
+for col in colunas:
+    for i in np.linspace(iris[col].min(),iris[col].max()):
+        assert df.GetLinha(df.Query(col,'<',i)) == iris[iris[col]<i].to_dict('list')
+        assert df.GetLinha(df.Query(col,'<=',i)) == iris[iris[col]<=i].to_dict('list')
+        assert df.GetLinha(df.Query(col,'>',i)) == iris[iris[col]>i].to_dict('list')
+        assert df.GetLinha(df.Query(col,'>=',i)) == iris[iris[col]>=i].to_dict('list')
+        assert df.GetLinha(df.Query(col,'==',i)) == iris[iris[col]==i].to_dict('list')
+
+
+df.IndexarColuna('species')
+df.IndexarColuna('sepal_length')
+df.IndexarColuna('sepal_width')
+df.IndexarColuna('petal_length')
+df.IndexarColuna('petal_width')
+
+for i in species:
+    assert df.GetLinha(df.Query('species','==',i)) == iris[iris['species']==i].to_dict('list')
+    
+colunas = iris.columns[0:-1]
+for col in colunas:
+    for i in np.linspace(iris[col].min(),iris[col].max()):
+        assert df.GetLinha(df.Query(col,'<',i)) == iris[iris[col]<i].to_dict('list')
+        assert df.GetLinha(df.Query(col,'<=',i)) == iris[iris[col]<=i].to_dict('list')
+        assert df.GetLinha(df.Query(col,'>',i)) == iris[iris[col]>i].to_dict('list')
+        assert df.GetLinha(df.Query(col,'>=',i)) == iris[iris[col]>=i].to_dict('list')
+        assert df.GetLinha(df.Query(col,'==',i)) == iris[iris[col]==i].to_dict('list')
+
+df.RemoverIndice('species')
+df.RemoverIndice('sepal_length')
+df.RemoverIndice('sepal_width')
+df.RemoverIndice('petal_length')
+df.RemoverIndice('petal_width')
+
+
 # Funcao para testar plotagem do grafico
-fig = df.Plot('col_1','col_3')
-plt.show()
+# fig = df.Plot('petal_length','petal_width')
+# plt.show()
 
 
-# for nome_coluna in df.colunas:
-#     print(nome_coluna)
-#     print(df.GetLoc(1,nome_coluna))

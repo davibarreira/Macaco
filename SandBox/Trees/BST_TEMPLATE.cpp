@@ -71,7 +71,7 @@ public:
         cout << endl;
     }
 
-    set<int> query(int val, string operador){
+    set<int> query(Tc val, string operador){
         set<int> output;
         if (operador == ">" | operador == ">=")
         query_g(pRoot, val, output, operador);

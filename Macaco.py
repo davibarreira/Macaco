@@ -160,6 +160,15 @@ class DataFrameMc():
         elif self.colunas[nome_coluna] == 'string':
             return self.df.GetNodeRowsString(valor, nome_coluna)
 
+    def Query_Tree(self, nome_coluna, operador,valor):
+        if self.colunas[nome_coluna] == 'int':
+            return self.df.QueryTreeInt([valor],nome_coluna, operador)
+        elif self.colunas[nome_coluna] == 'double':
+            return self.df.QueryTreeDouble([valor],nome_coluna, operador)
+        elif self.colunas[nome_coluna] == 'string':
+            return self.df.QueryTreeString([valor],nome_coluna, operador)
+
+
     def Query_Simples(self, nome_coluna, operador, valor):
         if self.colunas[nome_coluna] == 'int':
             return self.df.QuerySimpleInt([valor],nome_coluna, operador)

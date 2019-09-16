@@ -75,13 +75,16 @@ public:
         cout << endl;
     }
 
-    set<int> query(int val, string operador){
+    set<int> query(Tc val, string operador){
         set<int> output;
         if (operador == ">" | operador == ">=")
         query_g(pRoot, val, output, operador);
 
         if (operador == "<" | operador == "<=")
         query_l(pRoot, val, output, operador);
+
+        if (operador == "==")
+        output = get_node_rows(val);
 
         return output;
     }

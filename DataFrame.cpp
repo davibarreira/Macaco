@@ -62,6 +62,8 @@ public:
 	boost::python::list QuerySimpleString(boost::python::list & v, std::string nome_coluna, std::string operador);
 
 	boost::python::list QueryTreeInt(boost::python::list & v, std::string nome_coluna, std::string operador);
+	boost::python::list QueryTreeDouble(boost::python::list & v, std::string nome_coluna, std::string operador);
+	boost::python::list QueryTreeString(boost::python::list & v, std::string nome_coluna, std::string operador);
 };
 
 void DataFrame::InserirColunaInt(boost::python::list& l, std::string nome_coluna){
@@ -418,6 +420,32 @@ boost::python::list DataFrame::QueryTreeInt(boost::python::list & v, std::string
     return saida;
 }
 
+boost::python::list DataFrame::QueryTreeDouble(boost::python::list & v, std::string nome_coluna, std::string operador){
+	boost::python::list saida;
+	double valor = boost::python::extract<double>(v[0]);
+    set<int> rows_query = double_trees[nome_coluna].query(valor,operador);
+    std::vector<int> output(rows_query.begin(), rows_query.end());
+
+    for (int i = 0; i < output.size() ; i++)
+    {
+        saida.append(output[i]);
+    }
+    return saida;
+}
+
+boost::python::list DataFrame::QueryTreeString(boost::python::list & v, std::string nome_coluna, std::string operador){
+	boost::python::list saida;
+	std::string valor = boost::python::extract<std::string>(v[0]);
+    set<int> rows_query = string_trees[nome_coluna].query(valor,operador);
+    std::vector<int> output(rows_query.begin(), rows_query.end());
+
+    for (int i = 0; i < output.size() ; i++)
+    {
+        saida.append(output[i]);
+    }
+    return saida;
+}
+
 #include <boost/python.hpp>
 using namespace boost::python;
 
@@ -452,7 +480,9 @@ BOOST_PYTHON_MODULE(DataFrame)
     .def("QuerySimpleInt", & DataFrame::QuerySimpleInt)
     .def("QuerySimpleDouble", & DataFrame::QuerySimpleDouble)
     .def("QuerySimpleString", & DataFrame::QuerySimpleString)
-    .def_readwrite("coluna_int", & DataFrame::coluna_int)
+    .def("QueryTreeInt", & DataFrame::QueryTreeInt)
+    .def("QueryTreeDouble", & DataFrame::QueryTreeDouble)
+    .def("QueryTreeString", & DataFrame::QueryTreeString)
     ;
 
     // def("pass_ints", pass_ints);

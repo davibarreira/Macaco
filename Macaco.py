@@ -109,6 +109,7 @@ class DataFrameMc():
         resultado = {k: [] for k in self.colunas}
         for nome_coluna in self.colunas:
             resultado[nome_coluna].append(self.GetLoc(linha, nome_coluna))
+        resultado = {k:v[0] for k,v in resultado.items()}
         return resultado
 
     def GetDados(self):

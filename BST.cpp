@@ -75,6 +75,12 @@ public:
         cout << endl;
     }
 
+    set<int> query_bt(Tc v1, Tc v2){
+        set<int> output;
+        query_bt(pRoot, v1, v2, output);
+        return output;
+    }
+
     set<int> query(Tc val, string operador){
         set<int> output;
         if (operador == ">" | operador == ">=")
@@ -135,6 +141,21 @@ private:
             cout<< p->data <<endl;
             print(p->pChild[0], indent+6);
         }
+    }
+
+    void query_bt(Node<Tc> *root, Tc v1, Tc v2, set<int>& output)
+    {
+        if ( !root )
+            return ;
+        if ( v1 < root->data )
+            query_bt(root->pChild[0], v1, v2 , output);
+
+        if ( v1 <= root->data && v2 >= root->data){
+            output.insert((root->rows).begin(),(root->rows).end());
+        }
+
+        if ( v2 > root->data )
+        query_bt(root->pChild[1], v1, v2, output);
     }
 
     void query_eq(Node<Tc> *root, Tc value, set<int>& output, string op)

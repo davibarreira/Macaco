@@ -61,6 +61,12 @@ print(df.Query('col_3',"==","z"))
 df.RemoverIndice('col_1')
 print(df.indices)
 
+df.IndexarColuna('col_1')
+print(df.indices)
+df.Show(df.GetDados())
+queryrect = [1,5,100,100]
+print(df.QueryRect(queryrect, 'col_4','col_4'))
+
 
 
 

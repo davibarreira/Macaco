@@ -2,6 +2,16 @@
 #include <iomanip>
 #include <vector>
 #include <initializer_list>
+#include <iterator>
+
+#include <iostream>
+#include <string>
+#include <vector>
+#include <map>
+#include <any>
+#include <variant>
+#include <tuple>
+#include <iterator>
 
 #include <set>
 #include <string>
@@ -32,18 +42,18 @@ public:
 
     BST():pRoot(nullptr) {}
 
-    bool find(Tc x) {
+    bool find_node(Tc x) {
         Node<Tc> **p;
         return find(x, p);
     }
 
-    set<int> get_node(Tc x) {
+    std::set<int> get_node_rows(Tc x) {
         Node<Tc> **p;
         find(x, p);
         return (*p)->rows;
     }
 
-    void insert_with_row(Tc x, int row) {
+    void insert_node_with_row(Tc x, int row) {
         Node<Tc> **p;
         if (!find(x, p)) {
             *p = new Node<Tc>(x);
@@ -51,7 +61,7 @@ public:
         (*p)->rows.insert(row);
     }
 
-    void insert(Tc x) {
+    void insert_node(Tc x) {
         Node<Tc> **p;
         if (!find(x, p)) {
             *p = new Node<Tc>(x);
@@ -66,9 +76,16 @@ public:
     void remove_row(int row){
         remove_row(pRoot, row);
     }
+
     void print() {
         print(pRoot);
         cout << endl;
+    }
+
+    set<int> query_bt(Tc v1, Tc v2){
+        set<int> output;
+        query_bt(pRoot, v1, v2, output);
+        return output;
     }
 
     set<int> query(Tc val, string operador){
@@ -78,6 +95,9 @@ public:
 
         if (operador == "<" | operador == "<=")
         query_l(pRoot, val, output, operador);
+
+        if (operador == "==")
+        query_eq(pRoot, val, output, operador);
 
         return output;
     }
@@ -105,19 +125,19 @@ private:
             remove(*succesor);
         }
     }
-
-    void find_min(Node<Tc> **&p) {
-
-        while((*p)->pChild[0]){
-            p = &((*p)->pChild[0]);
-        }
-    }
-
+    
     void remove_row(Node<Tc> *p, int row) {
         if (p) {
             remove_row(p->pChild[1], row);
             (p->rows).erase(row);
             remove_row(p->pChild[0], row);
+        }
+    }
+
+    void find_min(Node<Tc> **&p) {
+
+        while((*p)->pChild[0]){
+            p = &((*p)->pChild[0]);
         }
     }
 
@@ -130,13 +150,42 @@ private:
         }
     }
 
+    void query_bt(Node<Tc> *root, Tc v1, Tc v2, set<int>& output)
+    {
+        if ( !root )
+            return ;
+        if ( v1 < root->data )
+            query_bt(root->pChild[0], v1, v2 , output);
+
+        if ( v1 <= root->data && v2 >= root->data){
+            output.insert((root->rows).begin(),(root->rows).end());
+        }
+
+        if ( v2 > root->data )
+        query_bt(root->pChild[1], v1, v2, output);
+    }
+
+    void query_eq(Node<Tc> *root, Tc value, set<int>& output, string op)
+    {
+        if ( !root )
+            return ;
+
+        query_eq(root->pChild[0], value, output, op);
+
+        if ( value == root->data){
+            output.insert((root->rows).begin(),(root->rows).end());
+        }
+
+        query_eq(root->pChild[1], value, output, op);
+    }
+
     void query_g(Node<Tc> *root, Tc value, set<int>& output, string op)
     {
         if ( !root )
             return ;
 
         if ( value < root->data )
-        query_g(root->pChild[0], value, output, op);
+            query_g(root->pChild[0], value, output, op);
 
         if (op == ">=")
         if ( value <= root->data){
@@ -148,7 +197,7 @@ private:
                 output.insert((root->rows).begin(),(root->rows).end());
             }
 
-        query_g(root->pChild[1], value, output, op);
+            query_g(root->pChild[1], value, output, op);
     }
 
     void query_l(Node<Tc> *root, Tc value, set<int>& output, string op)
@@ -171,43 +220,48 @@ private:
         if ( value > root->data )
         query_l(root->pChild[1], value, output, op);
     }
-
 };
-
-
 int main(){
 
     BST<int> tree;
     // tree.printRange(10, 20);
 
-    tree.insert_with_row(10, 10);
-    tree.insert_with_row(10, 10);
-    tree.insert_with_row(80, 80);
-    tree.insert_with_row(88, 88);
-    tree.insert_with_row(70, 70);
-    tree.insert_with_row(75, 75);
-    tree.insert_with_row(5, 5);
-    tree.insert_with_row(5, 5);
-    tree.insert_with_row(4, 4);
-    tree.insert_with_row(2, 2);
-    tree.insert_with_row(1, 1);
-    tree.insert_with_row(3, 3);
+    tree.insert_node_with_row(10, 10);
+    tree.insert_node_with_row(10, 10);
+    tree.insert_node_with_row(80, 80);
+    tree.insert_node_with_row(88, 88);
+    tree.insert_node_with_row(70, 70);
+    tree.insert_node_with_row(75, 75);
+    tree.insert_node_with_row(5, 5);
+    tree.insert_node_with_row(5, 5);
+    tree.insert_node_with_row(4, 4);
+    tree.insert_node_with_row(2, 2);
+    tree.insert_node_with_row(1, 1);
+    tree.insert_node_with_row(3, 3);
     tree.remove(88);
     tree.remove(70);
     tree.print();
-    std::set<int> s = tree.get_node(5);
+    std::set<int> s = tree.get_node_rows(5);
     std::vector<int> output(s.begin(), s.end());
-    cout << tree.get_node(5).size()<<endl;
-    cout << tree.get_node(1).size()<<endl;
-    cout << tree.get_node(80).size()<<endl;
+    cout << tree.get_node_rows(5).size()<<endl;
+    cout << tree.get_node_rows(1).size()<<endl;
+    cout << tree.get_node_rows(80).size()<<endl;
     tree.remove_row(1);
 
-    set<int> rows_query = tree.query(70,"<");
+    set<int> rows_query = tree.query_bt(5,80);
     std::vector<int> out(rows_query.begin(), rows_query.end());
 
-    for (auto i: out)
+    set<int> xrows = tree.query_bt(5, 80);
+    set<int> yrows = tree.query_bt(1, 4);
+    std::vector<int> interx(xrows.begin(), xrows.end());
+    std::vector<int> intery(yrows.begin(), yrows.end());
+    for (auto i: interx)
     {
-        cout << "r"<< i << endl;
+        cout << "x"<< i << endl;
+    }
+    for (auto i: intery)
+    {
+        cout << "y"<< i << endl;
     }
 
 

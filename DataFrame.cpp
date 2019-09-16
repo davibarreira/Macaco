@@ -6,6 +6,7 @@
 #include <variant>
 #include <tuple>
 #include "BST.cpp"
+#include <iterator>
 
 #include <boost/python.hpp>
 #include <boost/python/list.hpp>
@@ -64,6 +65,8 @@ public:
 	boost::python::list QueryTreeInt(boost::python::list & v, std::string nome_coluna, std::string operador);
 	boost::python::list QueryTreeDouble(boost::python::list & v, std::string nome_coluna, std::string operador);
 	boost::python::list QueryTreeString(boost::python::list & v, std::string nome_coluna, std::string operador);
+
+	boost::python::list QueryRect(boost::python::list & valores, std::string nome_coordenada1, std::string nome_coordenada2);
 };
 
 void DataFrame::InserirColunaInt(boost::python::list& l, std::string nome_coluna){
@@ -446,6 +449,44 @@ boost::python::list DataFrame::QueryTreeString(boost::python::list & v, std::str
     return saida;
 }
 
+boost::python::list DataFrame::QueryRect(boost::python::list & v, std::string nome_coordenada1, std::string nome_coordenada2){
+	boost::python::list saida;
+	boost::python::list xout;
+	boost::python::list yout;
+	double xmin = boost::python::extract<double>(v[0]);
+	double ymin = boost::python::extract<double>(v[1]);
+	double xmax = boost::python::extract<double>(v[2]);
+	double ymax = boost::python::extract<double>(v[3]);
+    set<int> xrows = double_trees[nome_coordenada1].query_bt(xmin, xmax);
+    set<int> yrows = double_trees[nome_coordenada2].query_bt(ymin, ymax);
+
+    // std::vector<int> output(xrows.begin(), xrows.end());
+    // std::vector<int> interx(xrows.begin(), xrows.end());
+    // std::vector<int> intery(yrows.begin(), yrows.end());
+    std::vector<int> output;
+    std::set_intersection(xrows.begin(), xrows.end(),
+                          yrows.begin(), yrows.end(),
+                          std::back_inserter(output));
+
+    for (int i = 0; i < output.size() ; i++)
+    {
+        saida.append(output[i]);
+    }
+
+    // for (int i = 0; i < interx.size() ; i++)
+    // {
+    //     xout.append(interx[i]);
+    // }
+    // for (int i = 0; i < intery.size() ; i++)
+    // {
+    //     yout.append(intery[i]);
+    // }
+    // saida.append(xout);
+    // saida.append(yout);
+    return saida;
+
+}
+
 #include <boost/python.hpp>
 using namespace boost::python;
 
@@ -483,6 +524,7 @@ BOOST_PYTHON_MODULE(DataFrame)
     .def("QueryTreeInt", & DataFrame::QueryTreeInt)
     .def("QueryTreeDouble", & DataFrame::QueryTreeDouble)
     .def("QueryTreeString", & DataFrame::QueryTreeString)
+    .def("QueryRect", & DataFrame::QueryRect)
     ;
 
     // def("pass_ints", pass_ints);

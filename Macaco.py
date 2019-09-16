@@ -187,6 +187,18 @@ class DataFrameMc():
     	else:
     		return self.Query_Simples(nome_coluna, operador, valor)
 
+    def QueryRect(self, queryrect, nome_coordenada1, nome_coordenada2):
+        if self.colunas[nome_coordenada1] != 'double' or self.colunas[nome_coordenada2] != 'double':
+            raise Exception('Colunas com coordenadas devem ser de doubles')
+        if nome_coordenada1 in self.indices and nome_coordenada2 in self.indices:
+            if len(queryrect) != 4 or not all(isinstance(x, (float,int)) for x in queryrect):
+                raise Exception('queryrect deve ser uma lista com 4 valores numericos')
+            return self.df.QueryRect(queryrect, nome_coordenada1, nome_coordenada2)
+
+        else:
+            raise Exception("Colunas de coordenadas precisam estar indexadas")
+
+
 
 
     # Funções de Visualização dos Dados (gráficos)

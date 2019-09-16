@@ -164,14 +164,6 @@ class DataFrameMc():
             self.df.RemoverIndiceString([], nome_coluna)
             self.indices.remove(nome_coluna)
 
-    def Query_Linhas_Nodes(self, valor,nome_coluna):
-        if self.colunas[nome_coluna] == 'int':
-            return self.df.GetNodeRowsInt(valor, nome_coluna)
-        elif self.colunas[nome_coluna] == 'double':
-            return self.df.GetNodeRowsDouble(valor, nome_coluna)
-        elif self.colunas[nome_coluna] == 'string':
-            return self.df.GetNodeRowsString(valor, nome_coluna)
-
     def Query_Tree(self, nome_coluna, operador,valor):
         if self.colunas[nome_coluna] == 'int':
             return self.df.QueryTreeInt([valor],nome_coluna, operador)

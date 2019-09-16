@@ -157,7 +157,7 @@ class DataFrameMc():
             self.df.RemoverIndiceString([], nome_coluna)
             self.indices.remove(nome_coluna)
 
-    def Query_Valor(self, valor,nome_coluna):
+    def Query_Linhas_Nodes(self, valor,nome_coluna):
         if self.colunas[nome_coluna] == 'int':
             return self.df.GetNodeRowsInt(valor, nome_coluna)
         elif self.colunas[nome_coluna] == 'double':
@@ -181,6 +181,12 @@ class DataFrameMc():
             return self.df.QuerySimpleDouble([valor],nome_coluna, operador)
         elif self.colunas[nome_coluna] == 'string':
             return self.df.QuerySimpleString([valor],nome_coluna, operador)
+
+    def Query(self, nome_coluna, operador, valor):
+    	if nome_coluna in self.indices:
+    		return self.Query_Tree(nome_coluna,operador,valor)
+    	else:
+    		return self.Query_Simples(nome_coluna, operador, valor)
 
 
 

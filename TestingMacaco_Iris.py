@@ -4,6 +4,16 @@ import pandas as pd
 import seaborn as sns
 import numpy as np
 
+
+#############################################################################
+# Arquivo contendo testes para o DataFrame. Compara as                      #
+# queries realizadas pela biblioteca Macaco vs as queries utilizando Pandas.#
+# O teste utiliza a famosa base de dados iris.                              #
+#############################################################################
+
+
+print('Iniciando os testes.')
+
 iris = sns.load_dataset('iris')
 data = iris.to_dict('list')
 df = mc.DataFrameMc(data)
@@ -80,3 +90,5 @@ df.RemoverLinha([0,1,2,3,5])
 assert df.shape[0] == iris.shape[0] - 5
 assert df.shape[1] == iris.shape[1]
 assert len(df.indices) == 4
+
+print('Passou em todos os testes!')

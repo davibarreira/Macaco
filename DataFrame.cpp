@@ -15,9 +15,15 @@
 
 class DataFrame{
 public:
+
+    // Maps para guardar dados do dataframe
+    // criados um para cada tipo de dado
     std::map<std::string, std::vector<int>> coluna_int;
     std::map<std::string,std::vector<double>> coluna_double;
     std::map<std::string,std::vector<std::string>> coluna_string;
+
+    // Maps para guardar arvores com indices
+    // criados um para cada tipo de dado
     std::map<std::string,BST<int>> int_trees;
     std::map<std::string,BST<double>> double_trees;
     std::map<std::string,BST<std::string>> string_trees;
@@ -27,6 +33,7 @@ public:
     void InserirColunaDouble(boost::python::list& l, std::string nome_coluna);
     void InserirColunaString(boost::python::list& l, std::string nome_coluna);
 
+    // Retorna valores das colunas para o python
     boost::python::list GetColunaInt(std::string nome_coluna);
     boost::python::list GetColunaDouble(std::string nome_coluna);
     boost::python::list GetColunaString(std::string nome_coluna);
@@ -35,6 +42,7 @@ public:
     void RemoverColunaDouble(boost::python::list& l, std::string nome_coluna);
     void RemoverColunaString(boost::python::list& l, std::string nome_coluna);
 
+    // Retorna valores de uma dada linha
     boost::python::list GetLinhaInt(boost::python::list & linhas, std::string nome_coluna);
     boost::python::list GetLinhaDouble(boost::python::list & linhas, std::string nome_coluna);
     boost::python::list GetLinhaString(boost::python::list & linhas, std::string nome_coluna);
@@ -43,14 +51,18 @@ public:
     void InserirLinhaDouble(boost::python::list& l, std::string nome_coluna);
     void InserirLinhaString(boost::python::list& l, std::string nome_coluna);
 
+
+    // Cria uma arvore com os indices e armazena no mapa de arvores
     void IndexarColunaInt(boost::python::list& l, std::string nome_coluna);
     void IndexarColunaDouble(boost::python::list& l, std::string nome_coluna);
     void IndexarColunaString(boost::python::list& l, std::string nome_coluna);
 
+    // Remove arvore do mapa de arvores
 	void RemoverIndiceInt(boost::python::list & l,std::string nome_coluna);
 	void RemoverIndiceDouble(boost::python::list & l,std::string nome_coluna);
 	void RemoverIndiceString(boost::python::list & l,std::string nome_coluna);
 
+    // Retornas set com linhas do dataframe para dados nodes da arvore
     boost::python::list GetNodeRowsInt(boost::python::list & nodes, std::string nome_coluna);
     boost::python::list GetNodeRowsDouble(boost::python::list & nodes, std::string nome_coluna);
     boost::python::list GetNodeRowsString(boost::python::list & nodes, std::string nome_coluna);
@@ -58,14 +70,17 @@ public:
 
 	void RemoverLinha(boost::python::list& l);
 
+	// Query quando a coluna nao esta indexada (numa arvore)
 	boost::python::list QuerySimpleInt(boost::python::list & v, std::string nome_coluna, std::string operador);
 	boost::python::list QuerySimpleDouble(boost::python::list & v, std::string nome_coluna, std::string operador);
 	boost::python::list QuerySimpleString(boost::python::list & v, std::string nome_coluna, std::string operador);
 
+	// Query quando a coluna esta indexada
 	boost::python::list QueryTreeInt(boost::python::list & v, std::string nome_coluna, std::string operador);
 	boost::python::list QueryTreeDouble(boost::python::list & v, std::string nome_coluna, std::string operador);
 	boost::python::list QueryTreeString(boost::python::list & v, std::string nome_coluna, std::string operador);
 
+	// Query de valores no retangulo.
 	boost::python::list QueryRect(boost::python::list & valores, std::string nome_coordenada1, std::string nome_coordenada2);
 };
 
@@ -460,9 +475,6 @@ boost::python::list DataFrame::QueryRect(boost::python::list & v, std::string no
     set<int> xrows = double_trees[nome_coordenada1].query_bt(xmin, xmax);
     set<int> yrows = double_trees[nome_coordenada2].query_bt(ymin, ymax);
 
-    // std::vector<int> output(xrows.begin(), xrows.end());
-    // std::vector<int> interx(xrows.begin(), xrows.end());
-    // std::vector<int> intery(yrows.begin(), yrows.end());
     std::vector<int> output;
     std::set_intersection(xrows.begin(), xrows.end(),
                           yrows.begin(), yrows.end(),
@@ -473,16 +485,6 @@ boost::python::list DataFrame::QueryRect(boost::python::list & v, std::string no
         saida.append(output[i]);
     }
 
-    // for (int i = 0; i < interx.size() ; i++)
-    // {
-    //     xout.append(interx[i]);
-    // }
-    // for (int i = 0; i < intery.size() ; i++)
-    // {
-    //     yout.append(intery[i]);
-    // }
-    // saida.append(xout);
-    // saida.append(yout);
     return saida;
 
 }

@@ -5,11 +5,12 @@ from tabulate import tabulate
 class DataFrameMc():
     """docstring for DataFrameMc"""
     def __init__(self,dados=None):
-        self.df      = DataFrame()
-        self.colunas = {}
+        self.df      = DataFrame() # DataFrame do .cpp
+        self.colunas = {}    # Dicionario de colunas com seus respectivos tipos
         self.shape   = [0,0] # Quantidade de linhas x colunas
-        self.indices = []
+        self.indices = []    # Colunas indexadas
 
+        # Codigo não aceita valores None.
         if dados != None:
             for coluna in dados:
                 self.InserirColuna(dados[coluna],str(coluna))

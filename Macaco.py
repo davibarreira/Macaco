@@ -204,7 +204,40 @@ class DataFrameMc():
 
     # Funções de Visualização dos Dados (gráficos)
 
-    def Plot(self,nome_coluna1,nome_coluna2):
+    # Funcao abaixo faz scatter plots e line plots.
+    # Podem ser utilizados os mesmo argumentos que para o pyplot do matplotlib
+    def Plot(self,nome_coluna1,nome_coluna2, *args,**kwargs):
         x = self.GetColuna(nome_coluna1)
         y = self.GetColuna(nome_coluna2)
-        plt.plot(x,y,'o')
+        plt.plot(x,y,*args,**kwargs)
+
+    def Hist(self,nome_coluna1, *args,**kwargs):
+        x = self.GetColuna(nome_coluna1)
+        plt.hist(x,*args,**kwargs)
+
+    def Hist2D(self,nome_coluna1, nome_coluna2,*args,**kwargs):
+        x = self.GetColuna(nome_coluna1)
+        y = self.GetColuna(nome_coluna2)
+        plt.hist2d(x,y,*args,**kwargs)
+
+    def Bar(self, coluna_altura, coluna_posicao, tipo='soma',*args, **kwargs):
+        altura   = self.GetColuna(coluna_altura)
+        posicao  = self.GetColuna(coluna_posicao)
+        categorias = sorted(list(set(self.GetColuna(coluna_posicao))))
+        soma     = {k:0 for k in categorias}
+        contador = {k:0 for k in categorias}
+        media    = {k:0 for k in categorias}
+        for cat in categorias:
+            for i in range(len(self.GetColuna(coluna_altura))):
+                if posicao[i] == cat:
+                    contador[cat]+=1
+                    soma[cat]+=altura[i]
+        for cat in categorias:
+            media[cat] = soma[cat]/contador[cat]
+
+        if tipo == 'soma':
+            plt.bar(soma.keys(),soma.values(),*args,**kwargs)
+        if tipo == 'media':
+            plt.bar(media.keys(),media.values(),*args,**kwargs)
+        if tipo == 'contador':
+            plt.bar(contador.keys(),contador.values(),*args,**kwargs)

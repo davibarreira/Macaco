@@ -141,6 +141,17 @@ class DataFrameMc():
             self.indices.append(nome_coluna)
             self.indices = list(sorted(set(self.indices)))
 
+    def RemoverIndice(self, nome_coluna):
+        if self.colunas[nome_coluna] == 'int':
+            self.df.RemoverIndiceInt([], nome_coluna)
+            self.indices.remove(nome_coluna)
+        elif self.colunas[nome_coluna] == 'double':
+            self.df.RemoverIndiceDouble([], nome_coluna)
+            self.indices.remove(nome_coluna)
+        elif self.colunas[nome_coluna] == 'string':
+            self.df.RemoverIndiceString([], nome_coluna)
+            self.indices.remove(nome_coluna)
+
     def Query_Valor(self, valor,nome_coluna):
         if self.colunas[nome_coluna] == 'int':
             return self.df.GetNodeRowsInt(valor, nome_coluna)

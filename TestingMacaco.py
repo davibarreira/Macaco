@@ -52,6 +52,9 @@ print(df.Query_Simples('col_1',"<=",3))
 print(df.Query_Simples('col_4',">",99))
 print(df.Query_Simples('col_3',"==","z"))
 
+df.RemoverIndice('col_1')
+print(df.indices)
+
 
 
 # Funcao para testar plotagem do grafico

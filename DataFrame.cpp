@@ -46,6 +46,10 @@ public:
     void IndexarColunaDouble(boost::python::list& l, std::string nome_coluna);
     void IndexarColunaString(boost::python::list& l, std::string nome_coluna);
 
+	void RemoverIndiceInt(boost::python::list & l,std::string nome_coluna);
+	void RemoverIndiceDouble(boost::python::list & l,std::string nome_coluna);
+	void RemoverIndiceString(boost::python::list & l,std::string nome_coluna);
+
     boost::python::list GetNodeRowsInt(boost::python::list & nodes, std::string nome_coluna);
     boost::python::list GetNodeRowsDouble(boost::python::list & nodes, std::string nome_coluna);
     boost::python::list GetNodeRowsString(boost::python::list & nodes, std::string nome_coluna);
@@ -56,6 +60,8 @@ public:
 	boost::python::list QuerySimpleInt(boost::python::list & v, std::string nome_coluna, std::string operador);
 	boost::python::list QuerySimpleDouble(boost::python::list & v, std::string nome_coluna, std::string operador);
 	boost::python::list QuerySimpleString(boost::python::list & v, std::string nome_coluna, std::string operador);
+
+	boost::python::list QueryTreeInt(boost::python::list & v, std::string nome_coluna, std::string operador);
 };
 
 void DataFrame::InserirColunaInt(boost::python::list& l, std::string nome_coluna){
@@ -389,6 +395,29 @@ boost::python::list DataFrame::QuerySimpleString(boost::python::list & v, std::s
     return l;
 }
 
+void DataFrame::RemoverIndiceInt(boost::python::list & l,std::string nome_coluna){
+    int_trees.erase(nome_coluna);
+}
+void DataFrame::RemoverIndiceDouble(boost::python::list & l,std::string nome_coluna){
+    int_trees.erase(nome_coluna);
+}
+void DataFrame::RemoverIndiceString(boost::python::list & l,std::string nome_coluna){
+    int_trees.erase(nome_coluna);
+}
+
+boost::python::list DataFrame::QueryTreeInt(boost::python::list & v, std::string nome_coluna, std::string operador){
+	boost::python::list saida;
+	int valor = boost::python::extract<int>(v[0]);
+    set<int> rows_query = int_trees[nome_coluna].query(valor,operador);
+    std::vector<int> output(rows_query.begin(), rows_query.end());
+
+    for (int i = 0; i < output.size() ; i++)
+    {
+        saida.append(output[i]);
+    }
+    return saida;
+}
+
 #include <boost/python.hpp>
 using namespace boost::python;
 
@@ -414,6 +443,9 @@ BOOST_PYTHON_MODULE(DataFrame)
     .def("IndexarColunaInt", & DataFrame::IndexarColunaInt)
     .def("IndexarColunaDouble", & DataFrame::IndexarColunaDouble)
     .def("IndexarColunaString", & DataFrame::IndexarColunaString)
+    .def("RemoverIndiceInt", & DataFrame::RemoverIndiceInt)
+    .def("RemoverIndiceDouble", & DataFrame::RemoverIndiceDouble)
+    .def("RemoverIndiceString", & DataFrame::RemoverIndiceString)
     .def("GetNodeRowsInt", & DataFrame::GetNodeRowsInt)
     .def("GetNodeRowsDouble", & DataFrame::GetNodeRowsDouble)
     .def("GetNodeRowsString", & DataFrame::GetNodeRowsString)

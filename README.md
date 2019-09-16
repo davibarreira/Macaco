@@ -1,7 +1,7 @@
 # Macaco - DataFrame C++/Python 
 ## Projeto Final do curso de Algoritmos e Estrutura de Dados
 Autores: Davi Barreira, Flavio Fontanella
-![./Imagem/alt text](./Macaco_Image.png)   
+![alt text](./Imagem/Macaco_Image.png)   
 
 ## Descrição
 Este trabalho consistiu na criação de uma biblioteca entitulada Macaco

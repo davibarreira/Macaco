@@ -64,6 +64,8 @@ df.Show(df.GetDados())
 queryrect = [1,5,100,100]
 print(df.QueryRect(queryrect, 'col_4','col_4'))
 
+df.Show(df.Slice([0,1,2],['col_1','col_3']))
+
 
 
 

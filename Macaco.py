@@ -124,6 +124,20 @@ class DataFrameMc():
     def GetDados(self):
         return self.GetLinha(range(0,self.shape[0]))
 
+    def Slice(self, linhas,nome_colunas):
+
+        if len(linhas) == 0:
+            linhas = list(range(0,self.shape[0]))
+        if len(nome_colunas) == 1:
+            slc = self.GetLoc(linhas,nome_coluna2)
+        else:
+            slc = {k:[] for k in nome_colunas}
+            for k in slc:
+                slc[k] = self.GetLoc(linhas,k)
+        return slc 
+
+
+
     def Show(self, dados):
     	print(tabulate(dados,tablefmt='simple',headers='keys'))
 

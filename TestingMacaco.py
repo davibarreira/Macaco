@@ -71,11 +71,11 @@ print(df.QueryRect(queryrect, 'col_4','col_4'))
 
 
 # Funcao para testar plotagem do grafico
-fig = df.Bar('col_1','col_3')
+fig = df.BarPlot('col_1','col_3')
 plt.show()
-fig = df.Bar('col_1','col_3','media')
+fig = df.BarPlot('col_1','col_3','media')
 plt.show()
-fig = df.Bar('col_1','col_3','contador')
+fig = df.BarPlot('col_1','col_3','contador')
 plt.show()
 fig = df.Plot('col_1','col_4','o')
 plt.show(fig,)

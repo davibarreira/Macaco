@@ -220,7 +220,7 @@ class DataFrameMc():
         y = self.GetColuna(nome_coluna2)
         plt.hist2d(x,y,*args,**kwargs)
 
-    def Bar(self, coluna_altura, coluna_posicao, tipo='soma',*args, **kwargs):
+    def BarPlot(self, coluna_altura, coluna_posicao, tipo='soma',*args, **kwargs):
         altura   = self.GetColuna(coluna_altura)
         posicao  = self.GetColuna(coluna_posicao)
         categorias = sorted(list(set(self.GetColuna(coluna_posicao))))

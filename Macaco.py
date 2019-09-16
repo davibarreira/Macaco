@@ -73,14 +73,20 @@ class DataFrameMc():
             self.df.RemoverColunaInt([],nome_coluna)
             self.colunas.pop(nome_coluna)
             self.shape[1] = self.shape[1] - 1
+            if nome_coluna in self.indices:
+            	RemoverIndice(nome_coluna)
         elif self.colunas[nome_coluna] == 'double':
             self.df.RemoverColunaDouble([],nome_coluna)
             self.colunas.pop(nome_coluna)
             self.shape[1] = self.shape[1] - 1
+            if nome_coluna in self.indices:
+            	RemoverIndice(nome_coluna)
         elif self.colunas[nome_coluna] == 'string':
             self.df.RemoverColunaString([],nome_coluna)
             self.colunas.pop(nome_coluna)
             self.shape[1] = self.shape[1] - 1
+            if nome_coluna in self.indices:
+            	RemoverIndice(nome_coluna)
 
     def RemoverLinha(self, linhas):
     	self.df.RemoverLinha(linhas)
@@ -189,11 +195,6 @@ class DataFrameMc():
     	else:
     		return self.Query_Simples(nome_coluna, operador, valor)
 
-
-
-
-
-    # def Query()
 
 
     # Funções de Visualização dos Dados (gráficos)

@@ -1,8 +1,5 @@
 import Macaco as mc
 from matplotlib import pyplot as plt
-import pandas as pd
-import seaborn as sns
-import numpy as np
 
 data = {'col_1': [3, 3, 3, 0], 'col_2': ['a', 'b', 'c', 'd']}
 df = mc.DataFrameMc(data)

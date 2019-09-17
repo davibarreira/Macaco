@@ -2,3 +2,4 @@ __pycache__/
 Tree/
 .ipynb_checkpoints/
 Macaco.egg-info
+.vagrant

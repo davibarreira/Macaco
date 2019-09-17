@@ -54,6 +54,9 @@ compile novamente os arquivos. Caso seja o caso, o usuário precisará
 instalar a biblioteca Boost com Python Boost em seu computador, junto
 com um compilador para C++17.
 
+Para que o Python funcione com o Python Boost, no Linux é necessário
+instalar a biblioteca `libboost-python-dev`.
+
 ## Documentação do Código
 Abaixo mostramos a estrutura geral do código. Ele é composto por três
 arquivos principais que já falamos na sessão de "Estrutura do Repositório".

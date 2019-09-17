@@ -40,6 +40,7 @@ Dê uma olhada para ver um exemplo prático de como utilizá-la;
 * Testes/  - Pasta com dois scripts de Python utilizados para testar a bibliotca. Script TestingMacaco_Iris.py compara os resultados do Macaco com
 a biblioteca Pandas. Script TestingMacaco.py roda funções padrão do 
 dataframe, garantindo assim a execução sem erros.
+* Vagrantfile - Arquivo de configuração de máquina virtual Vagrant.
 
 ## Requerimentos
 Essa biblioteca utiliza `C++17` e `Python 3.6`. Durante a instalação do 
@@ -56,6 +57,13 @@ com um compilador para C++17.
 
 Para que o Python funcione com o Python Boost, no Linux é necessário
 instalar a biblioteca `libboost-python-dev`.
+
+## Utilizando com Vagrant
+Junto com o código estamos também colocando o arquivo de configuração para
+a criação de uma máquina virtual Ubuntu utilizando Vagrant. Nesse arquivo estão
+os comando necessários para gerar a máquina virtual pronta para rodar a biblioteca.
+Estamos fazendo isso para evitar problemas de o código não rodar devido alguma
+particularidade do sistema operacional do usuário.
 
 ## Documentação do Código
 Abaixo mostramos a estrutura geral do código. Ele é composto por três

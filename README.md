@@ -68,14 +68,15 @@ particularidade do sistema operacional do usuário. Explicar como utilizar o Vag
 está fora do escopo desse projeto.
 
 Uma vez que o usuário já tenha o vagrant instalado, basta executar de dentro do repositório:
-´´´sh
+
+```sh
 vagrant up
-´´´
+```
 Esse comando irá subir a máquina com as configurações no Vagranfile. E em seguida,
 para acessar a máquina virtual:
-´´´sh
+```sh
 vagrant ssh
-´´´
+```
 
 
 ## Documentação do Código

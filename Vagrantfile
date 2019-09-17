@@ -68,12 +68,13 @@ Vagrant.configure("2") do |config|
     apt-get upgrade
     apt-get install -y apache2
     apt-get install git
-    apt-get install virtualenv
+    apt-get update
+    apt-get upgrade
+    apt-get install python3-pip -y
+    apt-get install libboost-python-dev -y
     mkdir macaco
     cd macaco
-    cp -r /vagrant-data/* .
-    apt-get install python3-pip
-    apt-get install libboost-python-dev
+    cp -r /vagrant_data/* .
     pip3 install -e .
     pip3 install pandas
     pip3 install seaborn

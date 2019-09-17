@@ -60,10 +60,23 @@ instalar a biblioteca `libboost-python-dev`.
 
 ## Utilizando com Vagrant
 Junto com o código estamos também colocando o arquivo de configuração para
-a criação de uma máquina virtual Ubuntu utilizando Vagrant. Nesse arquivo estão
+a criação de uma máquina virtual Ubuntu utilizando
+[Vagrant](https://www.vagrantup.com/intro/getting-started/). Nesse arquivo estão
 os comando necessários para gerar a máquina virtual pronta para rodar a biblioteca.
 Estamos fazendo isso para evitar problemas de o código não rodar devido alguma
-particularidade do sistema operacional do usuário.
+particularidade do sistema operacional do usuário. Explicar como utilizar o Vagrant
+está fora do escopo desse projeto.
+
+Uma vez que o usuário já tenha o vagrant instalado, basta executar de dentro do repositório:
+´´´sh
+vagrant up
+´´´
+Esse comando irá subir a máquina com as configurações no Vagranfile. E em seguida,
+para acessar a máquina virtual:
+´´´sh
+vagrant ssh
+´´´
+
 
 ## Documentação do Código
 Abaixo mostramos a estrutura geral do código. Ele é composto por três
